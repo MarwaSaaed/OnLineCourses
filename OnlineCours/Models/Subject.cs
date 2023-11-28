@@ -5,7 +5,6 @@ namespace OnlineCours.Models
     public class Subject :BaseClase
     {
         //Menaaaaaa
-
         public string Name { get; set; }
         [ForeignKey("Levels")]
         public int  LevelID { get; set; }

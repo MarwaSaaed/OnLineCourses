@@ -7,10 +7,7 @@ namespace OnlineCours.Models
         //Marwa
 
         public string Name { get; set; }
-        public List<Subject>  subjects { get; set; }
-        [ForeignKey("semester")]
-        public int SemesterID { get; set; }
-        public Semester? semester { get; set; }
+        public List<Semester> semesters { get; set; }
 
     }
 }
