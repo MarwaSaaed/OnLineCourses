@@ -2,7 +2,7 @@
 
 namespace OnlineCours.Models
 {
-    public class Semester :BaseClase
+    /*public class Semester :BaseClase
     {
         //Marwa
 
@@ -11,5 +11,5 @@ namespace OnlineCours.Models
         public Level? level { get; set; }
         public List<Subject> subjects { get; set; }
 
-    }
+    }*/
 }

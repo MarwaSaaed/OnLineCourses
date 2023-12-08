@@ -6,9 +6,14 @@ namespace OnlineCours.Models
     {
         //Menaaaaaa
         public string Name { get; set; }
-        [ForeignKey("Levels")]
-        public int  LevelID { get; set; }
-        public Level? Levels { get; set; }
-        public List<Appointment> appointments { get; set; }
-     }
+        public Grade Grade { get; set; }
+        public Semester Semester { get; set; }
+
+        [ForeignKey("InstructorSubjectBridge")]
+        public int InstructorSubjectBridgeID { get; set; }
+        public InstructorSubjectBridge InstructorSubjectBridge { get; set; }
+
+
+        //public Level? Levels { get; set; }
+    }
 }

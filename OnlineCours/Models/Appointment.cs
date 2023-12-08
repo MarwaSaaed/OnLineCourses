@@ -12,7 +12,7 @@ namespace OnlineCours.Models
         Friday,
         Saturday
     }
-    public enum Stutes
+    public enum Status
     {
         OnTime,
         Late,
@@ -24,12 +24,12 @@ namespace OnlineCours.Models
 
         public DateTime LectureDate { get; set; }
         public DayOfWeek DayOfWeek { get; set;}
-        public Stutes stutes { get; set;}
+        public Status Status { get; set;}
 
-        [ForeignKey("subject")]
-        public int subjectID { get; set; }
-        public Subject? subject { get; set; }
-        
-       
+        [ForeignKey("InstructorSubjectBridge")]
+        public int InstructorSubjectBridgeID { get; set; }
+        public InstructorSubjectBridge InstructorSubjectBridge { get; set; }
+
+
     }
 }

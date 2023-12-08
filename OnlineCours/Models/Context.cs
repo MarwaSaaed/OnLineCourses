@@ -13,12 +13,13 @@ namespace OnlineCours.Models
         }
         public DbSet<Student> Students { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
-        public DbSet<Semester> Semesters { get; set; }
-        public DbSet<InstructorLevelBridge> InstructorLevels { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<StudentSubjectBridge> StudentSubjects { get; set; }
-        public DbSet<Level> Levels { get; set; }
+
+        //public DbSet<Semester> Semesters { get; set; }
+        //public DbSet<InstructorLevelBridge> InstructorLevels { get; set; }
+        //public DbSet<Level> Levels { get; set; }
 
     }
 }

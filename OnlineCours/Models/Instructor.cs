@@ -3,18 +3,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineCours.Models
 {
-    public enum StutesOfInstructor
+    public enum StatusOfInstructor
     {
         Pendding,
         Accepted,
         Rejected
     }
-    public class Instructor
+    public class Instructor 
     {
         [Key]
         [ForeignKey("applicationUser")]
         public string applicationUserID { get; set; }
+
+        [ForeignKey("InstructorSubjectBridge")]
+        public int InstructorSubjectBridgeID { get; set; }
+
         public ApplicationUser applicationUser { get; set; }
-        public StutesOfInstructor stutes { get; set; } = StutesOfInstructor.Pendding;
+        public InstructorSubjectBridge InstructorSubjectBridge { get; set; }
+        public StatusOfInstructor status { get; set; } = StatusOfInstructor.Pendding;
+
     }
 }

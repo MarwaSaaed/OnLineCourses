@@ -2,7 +2,7 @@
 
 namespace OnlineCours.Models
 {
-    public class InstructorLevelBridge :BaseClase
+    /*public class InstructorLevelBridge :BaseClase
     {
         //Manoraaa
 
@@ -12,5 +12,5 @@ namespace OnlineCours.Models
         [ForeignKey("level")]
         public int LevelID { get; set; }
         public Level level { get; set; }
-    }
+    }*/
 }
