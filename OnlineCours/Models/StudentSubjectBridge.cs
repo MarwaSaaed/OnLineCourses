@@ -2,7 +2,7 @@
 
 namespace OnlineCours.Models
 {
-    public class StudentSubjectBridge :BaseClase
+    public class StudentSubjectBridge : BaseClase
     {
         //Marwa
         [ForeignKey("subject")]
