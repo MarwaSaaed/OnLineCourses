@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineCours.Models
 {
-   
     public class Student
     {
         //Menaaaaaa
@@ -13,7 +12,6 @@ namespace OnlineCours.Models
         public string applicationUserID { get; set; }
         public ApplicationUser applicationUser { get; set; }
         public StatusOfInstudent status { get; set; } = StatusOfInstudent.Pendding;
-        //public Grade Grade { get; set; }
 
     }
 }
