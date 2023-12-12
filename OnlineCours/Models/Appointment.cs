@@ -2,7 +2,7 @@
 
 namespace OnlineCours.Models
 {
-    public enum DayOfWeek
+    public enum Day
     {
         Sunday,
         Monday,
@@ -23,7 +23,7 @@ namespace OnlineCours.Models
         //Menaaaaaa
 
         public DateTime LectureDate { get; set; }
-        public DayOfWeek DayOfWeek { get; set;}
+        public Day DayOfWeek { get; set;}
         public Status Status { get; set;}
 
         [ForeignKey("InstructorSubjectBridge")]

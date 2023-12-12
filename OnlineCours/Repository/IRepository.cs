@@ -2,7 +2,7 @@
 
 namespace OCTW.Server.Repository
 {
-	public interface IRepository<T> where T : BaseClase 
+	public interface IRepository<T> where T : BaseClase
 	{
 		List<T> GetAllByFilter(Func<T, bool> predicate);
 		Task<T> GetById(int Id);

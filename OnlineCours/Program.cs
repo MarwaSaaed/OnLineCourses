@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnlineCours.Models;
+using OnlineCours.Repository;
 
 namespace OnlineCours
 {
@@ -20,6 +21,8 @@ namespace OnlineCours
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                             .AddEntityFrameworkStores<Context>();
 
+            builder.Services.AddScoped<IInstructorRepository, InstructorRepository>();
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -35,7 +38,9 @@ namespace OnlineCours
             }
 
             app.UseAuthorization();
+            app.UseHttpsRedirection();
 
+            app.UseAuthentication();
 
             app.MapControllers();
 
