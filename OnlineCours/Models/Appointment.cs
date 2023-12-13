@@ -16,12 +16,10 @@ namespace OnlineCours.Models
     {
         OnTime,
         Late,
-        Delete
+        Canceled,
     }
     public class Appointment :BaseClase
     {
-        //Menaaaaaa
-
         public DateTime LectureDate { get; set; }
         public Day DayOfWeek { get; set;}
         public Status Status { get; set;}
@@ -29,6 +27,7 @@ namespace OnlineCours.Models
         [ForeignKey("InstructorSubjectBridge")]
         public int InstructorSubjectBridgeID { get; set; }
         public InstructorSubjectBridge InstructorSubjectBridge { get; set; }
+
 
 
     }

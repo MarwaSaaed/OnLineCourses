@@ -1,10 +1,18 @@
-﻿namespace OnlineCours.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace OnlineCours.Models
 {
     public class InstructorSubjectBridge : BaseClase
     {
-        public List<Instructor> Instructors { get; set; }
-        public List<Subject> Subject { get; set; }
-        public List<Appointment> appointments { get; set; }
+        [ForeignKey("subject")]
+        public int SubjectID { get; set; }
+        public virtual Subject? subject { get; set; }
 
+
+        [ForeignKey("Instructor")]
+        public string InstructorID { get; set; }
+        public virtual Instructor? Instructor { get; set; }
+
+        public List<Appointment> appointments { get; set; }
     }
 }

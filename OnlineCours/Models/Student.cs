@@ -6,14 +6,13 @@ namespace OnlineCours.Models
    
     public class Student
     {
-        //Menaaaaaa
-
         [Key]
         [ForeignKey("applicationUser")]
         public string applicationUserID { get; set; }
         public ApplicationUser applicationUser { get; set; }
-        public StatusOfInstudent status { get; set; } = StatusOfInstudent.Pendding;
-        //public Grade Grade { get; set; }
 
+        public List<StudentRequest>? StudentRequests { get; set; }
+        public List<StudentSubjectBridge>? StudentSubjectBridges { get; set; }
+        
     }
 }

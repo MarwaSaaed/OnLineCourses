@@ -11,10 +11,13 @@ namespace OnlineCours.Models
         public Context(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
         }
+
         public DbSet<Student> Students { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Request> Requests { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<StudentRequest> StudentRequests { get; set; }
         public DbSet<StudentSubjectBridge> StudentSubjects { get; set; }
         public DbSet<InstructorSubjectBridge> InstructorSubjects { get; set; }
 

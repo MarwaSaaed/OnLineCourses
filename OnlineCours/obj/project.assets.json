@@ -4085,27 +4085,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\20106\\.nuget\\packages\\": {},
-    "C:\\Program Files\\DevExpress 23.1\\Components\\Offline Packages": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\menat\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\20106\\Desktop\\Menna_Job\\OnLineCourses\\OnlineCours\\OnlineCours.csproj",
+      "projectUniqueName": "F:\\Job\\Online Courses\\OnLine\\OnlineCours\\OnlineCours.csproj",
       "projectName": "OnlineCours",
-      "projectPath": "C:\\Users\\20106\\Desktop\\Menna_Job\\OnLineCourses\\OnlineCours\\OnlineCours.csproj",
-      "packagesPath": "C:\\Users\\20106\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\20106\\Desktop\\Menna_Job\\OnLineCourses\\OnlineCours\\obj\\",
+      "projectPath": "F:\\Job\\Online Courses\\OnLine\\OnlineCours\\OnlineCours.csproj",
+      "packagesPath": "C:\\Users\\menat\\.nuget\\packages\\",
+      "outputPath": "F:\\Job\\Online Courses\\OnLine\\OnlineCours\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\DevExpress 23.1\\Components\\Offline Packages",
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\20106\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 23.1.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\menat\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4113,7 +4105,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\DevExpress 23.1\\Components\\System\\Components\\Packages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4178,7 +4169,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
