@@ -22,7 +22,7 @@ namespace OnlineCours.Models
     {
         public DateTime LectureDate { get; set; }
         public Day DayOfWeek { get; set;}
-        public Status Status { get; set;}
+        public Status? Status { get; set;}
 
         [ForeignKey("InstructorSubjectBridge")]
         public int InstructorSubjectBridgeID { get; set; }

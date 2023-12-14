@@ -21,7 +21,7 @@ namespace OnlineCours
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                             .AddEntityFrameworkStores<Context>();
 
-            builder.Services.AddScoped<IInstructorRepository, InstructorRepository>();
+            //builder.Services.AddScoped<IInstructorRepository, InstructorRepository>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

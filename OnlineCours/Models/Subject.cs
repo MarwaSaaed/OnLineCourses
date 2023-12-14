@@ -2,12 +2,11 @@
 
 namespace OnlineCours.Models
 {
-    public class Subject :BaseClase
+    public class Subject : BaseClase
     {
         public string Name { get; set; }
+        public Grade Grade { get; set; }
 
         public List<InstructorSubjectBridge>? InstructorSubjectBridge { get; set; }
-        public List<StudentSubjectBridge>? StudentSubjectBridges { get; set; }
-
     }
 }

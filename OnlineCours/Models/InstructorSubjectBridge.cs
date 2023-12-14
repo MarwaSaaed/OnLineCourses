@@ -6,13 +6,13 @@ namespace OnlineCours.Models
     {
         [ForeignKey("subject")]
         public int SubjectID { get; set; }
-        public virtual Subject? subject { get; set; }
+        public virtual Subject? Subject { get; set; }
 
 
         [ForeignKey("Instructor")]
         public string InstructorID { get; set; }
         public virtual Instructor? Instructor { get; set; }
 
-        public List<Appointment> appointments { get; set; }
+        public List<Appointment> Appointments { get; set; }
     }
 }
