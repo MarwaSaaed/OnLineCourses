@@ -52,7 +52,7 @@ namespace OnlineCours.Controllers
                     if (registerDTO.Role == "Student")
                     {
                         Student student = new Student();
-                        student.applicationUserID = newUsr.Id;
+                        student.ApplicationUserID = newUsr.Id;
                         if (registerDTO.Role == "Student")
                         {
                             var addToRoleResult = await _userManager.AddToRoleAsync(newUsr, "Student");

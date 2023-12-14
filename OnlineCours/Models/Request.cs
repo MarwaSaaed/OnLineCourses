@@ -4,16 +4,16 @@ namespace OnlineCours.Models
 {
     public class Request : BaseClase
     {
-        public Grade Grade { get; set; }
-        public string SubjectName { get; set; }
+        public string Grade { get; set; }
 
         // عدد الساعات مختلفه عن الايام والساعات بتاعت الانستراكتور
-        public int NumberOfHouers { get; set; }
+        public int? NumberOfHouers { get; set; }
+        public StatusOfStudent status { get; set; } = StatusOfStudent.Pendding;
 
-        [ForeignKey("Instructor")]
-        public string InstructorID { get; set; }
-        public Instructor Instructor { get; set; }
 
-        public List<StudentRequest>? StudentRequests { get; set; }
+        [ForeignKey("Student")]
+        public string StudentID { get; set; }
+        public Student? Student { get; set; }
+
     }
 }

@@ -17,8 +17,7 @@ namespace OnlineCours.Models
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Request> Requests { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
-        public DbSet<StudentRequest> StudentRequests { get; set; }
-        public DbSet<StudentSubjectBridge> StudentSubjects { get; set; }
+        public DbSet<RequestAppointment> RequestAppointments { get; set; }
         public DbSet<InstructorSubjectBridge> InstructorSubjects { get; set; }
 
 

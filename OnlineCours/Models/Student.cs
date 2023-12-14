@@ -7,12 +7,10 @@ namespace OnlineCours.Models
     public class Student
     {
         [Key]
-        [ForeignKey("applicationUser")]
-        public string applicationUserID { get; set; }
-        public ApplicationUser applicationUser { get; set; }
+        [ForeignKey("ApplicationUser")]
+        public string ApplicationUserID { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
 
-        public List<StudentRequest>? StudentRequests { get; set; }
-        public List<StudentSubjectBridge>? StudentSubjectBridges { get; set; }
         
     }
 }
