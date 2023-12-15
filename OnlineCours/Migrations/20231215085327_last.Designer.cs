@@ -12,8 +12,8 @@ using OnlineCours.Models;
 namespace OnlineCours.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20231127183023_init34")]
-    partial class init34
+    [Migration("20231215085327_last")]
+    partial class last
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -241,26 +241,21 @@ namespace OnlineCours.Migrations
                     b.Property<int>("DayOfWeek")
                         .HasColumnType("int");
 
+                    b.Property<int>("InstructorSubjectBridgeID")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("LectureDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("StudentSubjectBridgeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("stutes")
-                        .HasColumnType("int");
-
-                    b.Property<int>("subjectID")
+                    b.Property<int?>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StudentSubjectBridgeId");
-
-                    b.HasIndex("subjectID");
+                    b.HasIndex("InstructorSubjectBridgeID");
 
                     b.ToTable("Appointments");
                 });
@@ -270,7 +265,7 @@ namespace OnlineCours.Migrations
                     b.Property<string>("applicationUserID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("stutes")
+                    b.Property<int>("status")
                         .HasColumnType("int");
 
                     b.HasKey("applicationUserID");
@@ -278,7 +273,7 @@ namespace OnlineCours.Migrations
                     b.ToTable("Instructors");
                 });
 
-            modelBuilder.Entity("OnlineCours.Models.InstructorLevelBridge", b =>
+            modelBuilder.Entity("OnlineCours.Models.InstructorSubjectBridge", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -293,19 +288,19 @@ namespace OnlineCours.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("LevelID")
+                    b.Property<int>("SubjectID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("InstructorID");
 
-                    b.HasIndex("LevelID");
+                    b.HasIndex("SubjectID");
 
-                    b.ToTable("InstructorLevels");
+                    b.ToTable("InstructorSubjects");
                 });
 
-            modelBuilder.Entity("OnlineCours.Models.Level", b =>
+            modelBuilder.Entity("OnlineCours.Models.Request", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -313,77 +308,64 @@ namespace OnlineCours.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("Grade")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SemesterID")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SemesterID");
-
-                    b.ToTable("Levels");
-                });
-
-            modelBuilder.Entity("OnlineCours.Models.Semester", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Semesters");
-                });
-
-            modelBuilder.Entity("OnlineCours.Models.Student", b =>
-                {
-                    b.Property<string>("applicationUserID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("stutes")
+                    b.Property<int?>("NumberOfHouers")
                         .HasColumnType("int");
-
-                    b.HasKey("applicationUserID");
-
-                    b.ToTable("Students");
-                });
-
-            modelBuilder.Entity("OnlineCours.Models.StudentSubjectBridge", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
 
                     b.Property<string>("StudentID")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("SubjectID")
+                    b.Property<int>("status")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("StudentID");
 
-                    b.HasIndex("SubjectID");
+                    b.ToTable("Requests");
+                });
 
-                    b.ToTable("StudentSubjects");
+            modelBuilder.Entity("OnlineCours.Models.RequestAppointment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AppointmentID")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("RequestID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppointmentID");
+
+                    b.HasIndex("RequestID");
+
+                    b.ToTable("RequestAppointments");
+                });
+
+            modelBuilder.Entity("OnlineCours.Models.Student", b =>
+                {
+                    b.Property<string>("ApplicationUserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ApplicationUserID");
+
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("OnlineCours.Models.Subject", b =>
@@ -394,19 +376,17 @@ namespace OnlineCours.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Grade")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<int>("LevelID")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LevelID");
 
                     b.ToTable("Subjects");
                 });
@@ -464,17 +444,13 @@ namespace OnlineCours.Migrations
 
             modelBuilder.Entity("OnlineCours.Models.Appointment", b =>
                 {
-                    b.HasOne("OnlineCours.Models.StudentSubjectBridge", null)
-                        .WithMany("appointments")
-                        .HasForeignKey("StudentSubjectBridgeId");
-
-                    b.HasOne("OnlineCours.Models.Subject", "subject")
-                        .WithMany("appointments")
-                        .HasForeignKey("subjectID")
+                    b.HasOne("OnlineCours.Models.InstructorSubjectBridge", "InstructorSubjectBridge")
+                        .WithMany("Appointments")
+                        .HasForeignKey("InstructorSubjectBridgeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("subject");
+                    b.Navigation("InstructorSubjectBridge");
                 });
 
             modelBuilder.Entity("OnlineCours.Models.Instructor", b =>
@@ -488,95 +464,79 @@ namespace OnlineCours.Migrations
                     b.Navigation("applicationUser");
                 });
 
-            modelBuilder.Entity("OnlineCours.Models.InstructorLevelBridge", b =>
+            modelBuilder.Entity("OnlineCours.Models.InstructorSubjectBridge", b =>
                 {
-                    b.HasOne("OnlineCours.Models.Instructor", "instructor")
-                        .WithMany()
+                    b.HasOne("OnlineCours.Models.Instructor", "Instructor")
+                        .WithMany("InstructorSubjectBridge")
                         .HasForeignKey("InstructorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("OnlineCours.Models.Level", "level")
-                        .WithMany()
-                        .HasForeignKey("LevelID")
+                    b.HasOne("OnlineCours.Models.Subject", "Subject")
+                        .WithMany("InstructorSubjectBridge")
+                        .HasForeignKey("SubjectID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("instructor");
+                    b.Navigation("Instructor");
 
-                    b.Navigation("level");
+                    b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("OnlineCours.Models.Level", b =>
+            modelBuilder.Entity("OnlineCours.Models.Request", b =>
                 {
-                    b.HasOne("OnlineCours.Models.Semester", "semester")
-                        .WithMany("Levels")
-                        .HasForeignKey("SemesterID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("semester");
-                });
-
-            modelBuilder.Entity("OnlineCours.Models.Student", b =>
-                {
-                    b.HasOne("OnlineCours.Models.ApplicationUser", "applicationUser")
-                        .WithMany()
-                        .HasForeignKey("applicationUserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("applicationUser");
-                });
-
-            modelBuilder.Entity("OnlineCours.Models.StudentSubjectBridge", b =>
-                {
-                    b.HasOne("OnlineCours.Models.Student", "student")
+                    b.HasOne("OnlineCours.Models.Student", "Student")
                         .WithMany()
                         .HasForeignKey("StudentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("OnlineCours.Models.Subject", "subject")
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("OnlineCours.Models.RequestAppointment", b =>
+                {
+                    b.HasOne("OnlineCours.Models.Appointment", "Appointment")
                         .WithMany()
-                        .HasForeignKey("SubjectID")
+                        .HasForeignKey("AppointmentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("student");
+                    b.HasOne("OnlineCours.Models.Request", "Request")
+                        .WithMany()
+                        .HasForeignKey("RequestID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("subject");
+                    b.Navigation("Appointment");
+
+                    b.Navigation("Request");
+                });
+
+            modelBuilder.Entity("OnlineCours.Models.Student", b =>
+                {
+                    b.HasOne("OnlineCours.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("OnlineCours.Models.Instructor", b =>
+                {
+                    b.Navigation("InstructorSubjectBridge");
+                });
+
+            modelBuilder.Entity("OnlineCours.Models.InstructorSubjectBridge", b =>
+                {
+                    b.Navigation("Appointments");
                 });
 
             modelBuilder.Entity("OnlineCours.Models.Subject", b =>
                 {
-                    b.HasOne("OnlineCours.Models.Level", "Levels")
-                        .WithMany("subjects")
-                        .HasForeignKey("LevelID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Levels");
-                });
-
-            modelBuilder.Entity("OnlineCours.Models.Level", b =>
-                {
-                    b.Navigation("subjects");
-                });
-
-            modelBuilder.Entity("OnlineCours.Models.Semester", b =>
-                {
-                    b.Navigation("Levels");
-                });
-
-            modelBuilder.Entity("OnlineCours.Models.StudentSubjectBridge", b =>
-                {
-                    b.Navigation("appointments");
-                });
-
-            modelBuilder.Entity("OnlineCours.Models.Subject", b =>
-                {
-                    b.Navigation("appointments");
+                    b.Navigation("InstructorSubjectBridge");
                 });
 #pragma warning restore 612, 618
         }

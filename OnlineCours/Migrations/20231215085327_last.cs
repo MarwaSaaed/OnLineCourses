@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OnlineCours.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class last : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -53,16 +53,18 @@ namespace OnlineCours.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Semesters",
+                name: "Subjects",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Grade = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Semesters", x => x.Id);
+                    table.PrimaryKey("PK_Subjects", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -175,7 +177,8 @@ namespace OnlineCours.Migrations
                 name: "Instructors",
                 columns: table => new
                 {
-                    applicationUserID = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    applicationUserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -192,112 +195,66 @@ namespace OnlineCours.Migrations
                 name: "Students",
                 columns: table => new
                 {
-                    applicationUserID = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    ApplicationUserID = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Students", x => x.applicationUserID);
+                    table.PrimaryKey("PK_Students", x => x.ApplicationUserID);
                     table.ForeignKey(
-                        name: "FK_Students_AspNetUsers_applicationUserID",
-                        column: x => x.applicationUserID,
+                        name: "FK_Students_AspNetUsers_ApplicationUserID",
+                        column: x => x.ApplicationUserID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Levels",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SemesterID = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Levels", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Levels_Semesters_SemesterID",
-                        column: x => x.SemesterID,
-                        principalTable: "Semesters",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "InstructorLevels",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    InstructorID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LevelID = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_InstructorLevels", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_InstructorLevels_Instructors_InstructorID",
-                        column: x => x.InstructorID,
-                        principalTable: "Instructors",
-                        principalColumn: "applicationUserID",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_InstructorLevels_Levels_LevelID",
-                        column: x => x.LevelID,
-                        principalTable: "Levels",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Subjects",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LevelID = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Subjects", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Subjects_Levels_LevelID",
-                        column: x => x.LevelID,
-                        principalTable: "Levels",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "StudentSubjects",
+                name: "InstructorSubjects",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SubjectID = table.Column<int>(type: "int", nullable: false),
+                    InstructorID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InstructorSubjects", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_InstructorSubjects_Instructors_InstructorID",
+                        column: x => x.InstructorID,
+                        principalTable: "Instructors",
+                        principalColumn: "applicationUserID",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_InstructorSubjects_Subjects_SubjectID",
+                        column: x => x.SubjectID,
+                        principalTable: "Subjects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Requests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Grade = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NumberOfHouers = table.Column<int>(type: "int", nullable: true),
+                    status = table.Column<int>(type: "int", nullable: false),
                     StudentID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StudentSubjects", x => x.Id);
+                    table.PrimaryKey("PK_Requests", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_StudentSubjects_Students_StudentID",
+                        name: "FK_Requests_Students_StudentID",
                         column: x => x.StudentID,
                         principalTable: "Students",
-                        principalColumn: "applicationUserID",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_StudentSubjects_Subjects_SubjectID",
-                        column: x => x.SubjectID,
-                        principalTable: "Subjects",
-                        principalColumn: "Id",
+                        principalColumn: "ApplicationUserID",
                         onDelete: ReferentialAction.NoAction);
                 });
 
@@ -309,36 +266,52 @@ namespace OnlineCours.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LectureDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DayOfWeek = table.Column<int>(type: "int", nullable: false),
-                    stutes = table.Column<int>(type: "int", nullable: false),
-                    subjectID = table.Column<int>(type: "int", nullable: false),
-                    StudentSubjectBridgeId = table.Column<int>(type: "int", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: true),
+                    InstructorSubjectBridgeID = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Appointments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Appointments_StudentSubjects_StudentSubjectBridgeId",
-                        column: x => x.StudentSubjectBridgeId,
-                        principalTable: "StudentSubjects",
-                        principalColumn: "Id");
+                        name: "FK_Appointments_InstructorSubjects_InstructorSubjectBridgeID",
+                        column: x => x.InstructorSubjectBridgeID,
+                        principalTable: "InstructorSubjects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RequestAppointments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RequestID = table.Column<int>(type: "int", nullable: false),
+                    AppointmentID = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RequestAppointments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Appointments_Subjects_subjectID",
-                        column: x => x.subjectID,
-                        principalTable: "Subjects",
+                        name: "FK_RequestAppointments_Appointments_AppointmentID",
+                        column: x => x.AppointmentID,
+                        principalTable: "Appointments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_RequestAppointments_Requests_RequestID",
+                        column: x => x.RequestID,
+                        principalTable: "Requests",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Appointments_StudentSubjectBridgeId",
+                name: "IX_Appointments_InstructorSubjectBridgeID",
                 table: "Appointments",
-                column: "StudentSubjectBridgeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Appointments_subjectID",
-                table: "Appointments",
-                column: "subjectID");
+                column: "InstructorSubjectBridgeID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -380,42 +353,34 @@ namespace OnlineCours.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InstructorLevels_InstructorID",
-                table: "InstructorLevels",
+                name: "IX_InstructorSubjects_InstructorID",
+                table: "InstructorSubjects",
                 column: "InstructorID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InstructorLevels_LevelID",
-                table: "InstructorLevels",
-                column: "LevelID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Levels_SemesterID",
-                table: "Levels",
-                column: "SemesterID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StudentSubjects_StudentID",
-                table: "StudentSubjects",
-                column: "StudentID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StudentSubjects_SubjectID",
-                table: "StudentSubjects",
+                name: "IX_InstructorSubjects_SubjectID",
+                table: "InstructorSubjects",
                 column: "SubjectID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Subjects_LevelID",
-                table: "Subjects",
-                column: "LevelID");
+                name: "IX_RequestAppointments_AppointmentID",
+                table: "RequestAppointments",
+                column: "AppointmentID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RequestAppointments_RequestID",
+                table: "RequestAppointments",
+                column: "RequestID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Requests_StudentID",
+                table: "Requests",
+                column: "StudentID");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Appointments");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -432,31 +397,31 @@ namespace OnlineCours.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "InstructorLevels");
-
-            migrationBuilder.DropTable(
-                name: "StudentSubjects");
+                name: "RequestAppointments");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Instructors");
+                name: "Appointments");
+
+            migrationBuilder.DropTable(
+                name: "Requests");
+
+            migrationBuilder.DropTable(
+                name: "InstructorSubjects");
 
             migrationBuilder.DropTable(
                 name: "Students");
+
+            migrationBuilder.DropTable(
+                name: "Instructors");
 
             migrationBuilder.DropTable(
                 name: "Subjects");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Levels");
-
-            migrationBuilder.DropTable(
-                name: "Semesters");
         }
     }
 }

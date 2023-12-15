@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.EntityFrameworkCore;
 using OnlineCours.Models;
 
 namespace OCTW.Server.Repository
@@ -19,18 +20,18 @@ namespace OCTW.Server.Repository
 		}
 
 
-		public async Task<List<T>> GetAllAsync(string? include=null)
+		public async Task<List<T>> GetAllAsync(string[] include = null)
 		{
-			if(include!=null)
+			IQueryable<T> Query = _context.Set<T>().Where(x => x.IsDeleted == false);
+            if (include!=null)
 			{
-                return _context.Set<T>().Include(include).Where(x => x.IsDeleted == false).ToList();
+				foreach (var inc in include)
+				{
+					Query = Query.Include(inc);
+				}
 
             }
-			else
-			{
-                return _context.Set<T>().Where(x => x.IsDeleted == false).ToList();
-
-            }
+			return Query.ToList();
         }
 
 		public List<T> GetAllByFilter(Func<T, bool> predicate)

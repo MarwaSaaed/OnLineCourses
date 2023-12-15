@@ -6,7 +6,7 @@ namespace OCTW.Server.Repository
 	{
 		List<T> GetAllByFilter(Func<T, bool> predicate);
 		Task<T> GetById(int Id);
-		Task<List<T>> GetAllAsync(string? v=null);
+		Task<List<T>> GetAllAsync(string[] v=null);
 		Task CreateAsync(T entity);
 		Task UpdateAsync(T entity);
 
