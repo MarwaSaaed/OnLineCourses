@@ -1,6 +1,7 @@
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using OCTW.Server.Repository;
 using OnlineCours.Models;
 using OnlineCours.Repository;
 
@@ -22,6 +23,10 @@ namespace OnlineCours
                             .AddEntityFrameworkStores<Context>();
 
             //builder.Services.AddScoped<IInstructorRepository, InstructorRepository>();
+            builder.Services.AddScoped<ISubjectRepository, SubjectRepository>();
+            builder.Services.AddScoped<IRequestAppointmentRepository, RequestAppointmentRepository>();
+            builder.Services.AddScoped<IRequestRepository, RequestRepository>();
+            builder.Services.AddScoped<IPersonRepository<Instructor>, PersonRepository<Instructor>>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
