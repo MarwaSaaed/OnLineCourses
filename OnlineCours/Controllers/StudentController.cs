@@ -80,6 +80,8 @@ namespace OnlineCours.Controllers
             return Ok(new Result { Message = "Created" });
                 
         }
+
+        [HttpGet("GetSubjectsByStudent")]
     
         public  async Task <IActionResult> GetStudentSubject(string StudentId)
         {

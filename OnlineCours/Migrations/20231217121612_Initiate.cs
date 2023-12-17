@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OnlineCours.Migrations
 {
     /// <inheritdoc />
-    public partial class last : Migration
+    public partial class Initiate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -12,8 +12,8 @@ using OnlineCours.Models;
 namespace OnlineCours.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20231215085327_last")]
-    partial class last
+    [Migration("20231217121612_Initiate")]
+    partial class Initiate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

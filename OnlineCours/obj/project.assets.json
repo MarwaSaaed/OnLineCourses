@@ -4085,32 +4085,31 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\noure\\.nuget\\packages\\": {},
-    "C:\\Program Files\\DevExpress 23.1\\Components\\Offline Packages": {}
+    "C:\\Users\\Electronica Care\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\OnLineCourses\\OnlineCours\\OnlineCours.csproj",
+      "projectUniqueName": "F:\\ITI3\\WebApi\\online\\OnLineCourses\\OnlineCours\\OnlineCours.csproj",
       "projectName": "OnlineCours",
-      "projectPath": "D:\\OnLineCourses\\OnlineCours\\OnlineCours.csproj",
-      "packagesPath": "C:\\Users\\noure\\.nuget\\packages\\",
-      "outputPath": "D:\\OnLineCourses\\OnlineCours\\obj\\",
+      "projectPath": "F:\\ITI3\\WebApi\\online\\OnLineCourses\\OnlineCours\\OnlineCours.csproj",
+      "packagesPath": "C:\\Users\\Electronica Care\\.nuget\\packages\\",
+      "outputPath": "F:\\ITI3\\WebApi\\online\\OnLineCourses\\OnlineCours\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\DevExpress 23.1\\Components\\Offline Packages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\noure\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 23.1.config",
+        "C:\\Users\\Electronica Care\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\DevExpress 23.1\\Components\\System\\Components\\Packages": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4175,7 +4174,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }
