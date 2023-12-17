@@ -33,6 +33,7 @@ namespace OnlineCours.Controllers
             _RequestAppointmentRepository = RequestAppointmentRepository;
             _SubjectRepository = SubjectRepository;
         }
+
         [HttpPost("StudentRequestToTakeSubject")]
         public  async Task<IActionResult> RequestSubject(StudentRequestToTakeSubject StudentRequestToTakeSubject)
         {
@@ -80,7 +81,9 @@ namespace OnlineCours.Controllers
             return Ok(new Result { Message = "Created" });
                 
         }
-    
+
+
+        [HttpGet("GetStudentSubject")]
         public  async Task <IActionResult> GetStudentSubject(string StudentId)
         {
             List<Subject> Subjects = await _SubjectRepository.GetSubjectsByStudent(StudentId);
