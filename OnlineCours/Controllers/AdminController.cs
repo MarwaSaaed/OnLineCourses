@@ -43,6 +43,7 @@ namespace OnlineCours.Controllers
             return Ok(RequestAppointment);
         }
 
+
         [HttpPut("AcceptStudentRequest/{RequestId}")]
         public async Task<IActionResult> AcceptStudentRequest(int RequestId)
         {
@@ -57,6 +58,7 @@ namespace OnlineCours.Controllers
             return NotFound("RequestNotFound");
 
         }
+
         
         [HttpPut("RejectStudentRequest/{RequestId}")]
         public async Task<IActionResult> RejectStudentRequest(int RequestId)
@@ -72,6 +74,7 @@ namespace OnlineCours.Controllers
             return BadRequest();
 
         }
+
         
         [HttpPut("AcceptInstructorRequest/{InstructorId}")]
         public async Task<IActionResult> AcceptInstructor(string InstructorId)
@@ -88,6 +91,8 @@ namespace OnlineCours.Controllers
             }
             return BadRequest();
         }
+
+
         [HttpPut("RejectInstructorRequest/{InstructorId}")]
         public async Task<IActionResult> RejectInstructor(string InstructorId)
         {

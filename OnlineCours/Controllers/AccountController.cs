@@ -32,7 +32,7 @@ namespace OnlineCours.Controllers
 
         [HttpPost("Register")]
         public async Task<ActionResult<Result>> RegisterAsync(RegisterDTO registerDTO)
-        {
+        { 
             Result result1 = new Result();
 
             if (ModelState.IsValid)
@@ -43,7 +43,7 @@ namespace OnlineCours.Controllers
                 newUsr.UserName = registerDTO.UserName;
                 newUsr.Email = registerDTO.Email;
                 newUsr.PhoneNumber = registerDTO.Phone;
-              
+
                 IdentityResult result = await _userManager.CreateAsync(newUsr, registerDTO.Password);
 
                 if (result.Succeeded)
@@ -61,7 +61,7 @@ namespace OnlineCours.Controllers
                                 return BadRequest("Failed to assign the 'Student' role.");
                             }
                         }
-                      
+
 
                         _context.Students.Add(student);
                     }
@@ -77,24 +77,24 @@ namespace OnlineCours.Controllers
                         }
                         _context.Instructors.Add(instructor);
                     }
-                   
-                  
-                    }
-                    _context.SaveChanges();
-                    result1.Message = "sucess";
-                    result1.IsPass = true;
-                    result1.Data = newUsr.UserName;
-                    return Ok(result1);
+
+
                 }
-                else
-                {
-                    result1.Message = "the register failed";
-                    result1.IsPass = false;
-                    return BadRequest(ModelState);
-                }
-            
-           
+                _context.SaveChanges();
+                result1.Message = "sucess";
+                result1.IsPass = true;
+                result1.Data = newUsr.UserName;
+                return Ok(result1);
+            }
+            else
+            {
+                result1.Message = "the register failed";
+                result1.IsPass = false;
+                return BadRequest(ModelState);
+            }
+
         }
+
 
         [HttpPost("UploadImage")]
         public string UploadImage(IFormFile file)
@@ -115,7 +115,7 @@ namespace OnlineCours.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("AddRole")]
         public async Task<ActionResult> AddRole(string role)
         {
 
@@ -130,7 +130,7 @@ namespace OnlineCours.Controllers
         }
 
 
-        [HttpGet("Role")] // Change to HTTP GET to retrieve roles
+        [HttpGet("GetAllRoles")] // Change to HTTP GET to retrieve roles
         public IActionResult GetAllRoles()
         {
             var roles = _roleManager.Roles.ToList(); // Retrieve all roles and convert to a list

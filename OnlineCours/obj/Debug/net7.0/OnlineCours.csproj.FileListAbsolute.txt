@@ -322,3 +322,4 @@ D:\OnLineCourses\OnlineCours\obj\Debug\net7.0\refint\OnlineCours.dll
 D:\OnLineCourses\OnlineCours\obj\Debug\net7.0\OnlineCours.pdb
 D:\OnLineCourses\OnlineCours\obj\Debug\net7.0\OnlineCours.genruntimeconfig.cache
 D:\OnLineCourses\OnlineCours\obj\Debug\net7.0\ref\OnlineCours.dll
+F:\Job\Online Courses\Online\OnlineCours\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
