@@ -55,6 +55,8 @@ namespace OnlineCours
             builder.Services.AddScoped<ISubjectRepository, SubjectRepository>();
             builder.Services.AddScoped<IRequestAppointmentRepository, RequestAppointmentRepository>();
             builder.Services.AddScoped<IRequestRepository, RequestRepository>();
+            builder.Services.AddScoped<IInstructorRepository, InstructorRepository>();
+
             builder.Services.AddScoped<IPersonRepository<Instructor>, PersonRepository<Instructor>>();
 
             builder.Services.AddControllers();
@@ -75,6 +77,11 @@ namespace OnlineCours
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+            );
 
             app.MapControllers();
 

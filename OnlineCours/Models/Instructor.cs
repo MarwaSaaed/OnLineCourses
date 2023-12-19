@@ -18,6 +18,5 @@ namespace OnlineCours.Models
         public StatusOfInstructor status { get; set; } = StatusOfInstructor.Pendding;
 
         public List<InstructorSubjectBridge>? InstructorSubjectBridge { get; set; }
-
     }
 }

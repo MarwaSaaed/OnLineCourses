@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using OCTW.Server.Repository;
 using OnlineCours.DTO;
 using OnlineCours.Models;
 using System;
@@ -11,72 +12,79 @@ using System.Numerics;
 
 namespace OnlineCours.Repository
 {
-    public class InstructorRepository //: IInstructorRepository
+    public class InstructorRepository :PersonRepository<Instructor> , IInstructorRepository
     {
         Context _context { get; set; }
-        public InstructorRepository(Context context)
+        public InstructorRepository(Context context) : base(context)
         {
             _context = context;
-        }
-        public Instructor CreateAsync(Instructor entity)
-        {
-            _context.Add(entity);
-
-            return entity;
         }
 
         public async Task<string> Delete(string id)
         {
-            Instructor instructor = _context.Instructors.Include(ins => ins.applicationUser).Include(x => x.InstructorSubjectBridge).FirstOrDefault(Instructor => Instructor.applicationUserID == id);
+            Instructor instructor = _context.Instructors.Include(ins => ins.applicationUser)
+                .Include(x => x.InstructorSubjectBridge)
+                .FirstOrDefault(Instructor => Instructor.applicationUserID == id);
 
             if (instructor != null)
             {
                 instructor.applicationUser.IsDeleted = true;
                 await _context.SaveChangesAsync();
-                return "DeletedSuccessfully";
+                return "Deleted Successfully";
             }
             return "Id Not Found";
         }
 
 
-        //public async Task<List<InstructorDTO>> GetAllAsync()
-        //{
-        //    List<Instructor> instructors = _context.Instructors
-        //    .Include(x => x.InstructorSubjectBridge)
-        //        .ThenInclude(bridge => bridge.Subject)
-        //    .Include(x => x.InstructorSubjectBridge)
-        //        .ThenInclude(bridge => bridge.Instructor)
-        //    .Include(x => x.applicationUser)
-        //    .ToList();
+        public async Task<List<InstructorDTO>> GetAllAsync()
+        {
+            List<Instructor> instructors = _context.Instructors
+            .Include(x => x.applicationUser)
+            .Include(x => x.InstructorSubjectBridge)
+                .ThenInclude(bridge => bridge.Subject)
+            .Include(x => x.InstructorSubjectBridge)
+                .ThenInclude(bridge => bridge.Appointments)
+            .ToList();
 
 
-        //    List<InstructorDTO> insDTO = new List<InstructorDTO>();
+            List<InstructorDTO> insDTO = new List<InstructorDTO>();
 
-        //    foreach (var instructor in instructors)
-        //    {
-        //        var appointments = instructor.InstructorSubjectBridge.Appointments.Select(x => x.DayOfWeek).ToList();
-        //        var subjects = _context.Subjects
-        //        .Where(s => s.InstructorSubjectBridge.Instructor.Any(i => i.applicationUserID == instructor.applicationUserID)).Select(x => x.Name)
-        //        .ToList();
+            foreach (var instructor in instructors)
+            {
+                List<AppoinstmentDTO> Appointment = new List<AppoinstmentDTO>();
+                var BridgeList = instructor.InstructorSubjectBridge.ToList();
 
-        //        insDTO.Add(new InstructorDTO
-        //        {
-        //            Name = instructor.applicationUser.Name,
-        //            status = instructor.status,
-        //            Appointments = appointments,
-        //            Subjects = subjects
-        //        });
-        //    }
+                foreach (var brid in BridgeList)
+                {
+                    foreach(var appointment in brid.Appointments)
+                    {
+                        AppoinstmentDTO appoinstmentDTO = new AppoinstmentDTO();
+                        appoinstmentDTO.DayOfWeek = appointment.DayOfWeek;
+                        appoinstmentDTO.LectureDate = appointment.LectureDate;
+                        Appointment.Add(appoinstmentDTO);
 
-        //    return insDTO;
-        //}
+                    }
+                }
+                var subjects = BridgeList.Select(x => x.Subject.Name).ToList();
+
+                insDTO.Add(new InstructorDTO
+                {
+                    Name = instructor.applicationUser.Name,
+                    status = instructor.status,
+                    Appointments = Appointment,
+                    Subjects = subjects
+                });
+            }
+
+            return insDTO;
+        }
 
 
         //public async Task<InstructorDTO> GetById(string Id)
         //{
         //    Instructor Instructor = _context.Instructors
         //        .Include(x => x.InstructorSubjectBridge)
-        //        .ThenInclude(x => new { x.Subject, x.Instructors })
+        //        .ThenInclude(x => new { x.Subject, x.Instructor })
         //        .Include(x => x.applicationUser)
         //        .FirstOrDefault(Instructor => Instructor.applicationUserID == Id);
 
@@ -98,6 +106,9 @@ namespace OnlineCours.Repository
 
         //    return insDTO;
         //}
+
+
+
         //public async Task<List<InstructorDTO>> Get(Expression<Func<Instructor, bool>> expression)
         //{
         //    List<Instructor> Instructor = _context.Instructors.Where(expression).ToList();
@@ -121,11 +132,12 @@ namespace OnlineCours.Repository
 
         //    return insDTO;
         //}
-        public async Task UpdateAsync(Instructor entity)
-        {
-            _context.Instructors.Update(entity);
-            await _context.SaveChangesAsync();
-        }
+
+        //public async Task UpdateAsync(Instructor entity)
+        //{
+        //    _context.Instructors.Update(entity);
+        //    await _context.SaveChangesAsync();
+        //}
 
         public void Update(Instructor entity, params string[] properties)
         {
@@ -182,32 +194,32 @@ namespace OnlineCours.Repository
 
         //public async Task<List<InstructorDTO>> GetByDay(int DayOfWeek)
         //{
-        //    //List<Instructor> instructors = _context.Instructors
-        //    //    .Include(x => x.InstructorSubjectBridge)
-        //    //    .ThenInclude(x => x.Appointments)
-        //    //    .Where(x => x.InstructorSubjectBridge.Appointments
-        //    //        .Any(appointment => (int)appointment.DayOfWeek == DayOfWeek)).ToList();
+        //    List<Instructor> instructors = _context.Instructors
+        //        .Include(x => x.InstructorSubjectBridge)
+        //        .ThenInclude(x => x.Appointments)
+        //        .Where(x => x.InstructorSubjectBridge.Appointments
+        //            .Any(appointment => (int)appointment.DayOfWeek == DayOfWeek)).ToList();
 
 
-        //    //List<InstructorDTO> insDTO = new List<InstructorDTO>();
+        //    List<InstructorDTO> insDTO = new List<InstructorDTO>();
 
-        //    //foreach (var instructor in instructors)
-        //    //{
-        //    //    var appointments = instructor.InstructorSubjectBridge.Appointments.Select(x => x.DayOfWeek).ToList();
-        //    //    var subjects = _context.Subjects
-        //    //    .Where(s => s.InstructorSubjectBridge.Instructors.Any(i => i.applicationUserID == instructor.applicationUserID)).Select(x => x.Name)
-        //    //    .ToList();
+        //    foreach (var instructor in instructors)
+        //    {
+        //        var appointments = instructor.InstructorSubjectBridge.Appointments.Select(x => x.DayOfWeek).ToList();
+        //        var subjects = _context.Subjects
+        //        .Where(s => s.InstructorSubjectBridge.Instructors.Any(i => i.applicationUserID == instructor.applicationUserID)).Select(x => x.Name)
+        //        .ToList();
 
-        //    //    insDTO.Add(new InstructorDTO
-        //    //    {
-        //    //        Name = instructor.applicationUser.Name,
-        //    //        status = instructor.status,
-        //    //        Appointments = appointments,
-        //    //        Subjects = subjects
-        //    //    });
-        //    //}
+        //        insDTO.Add(new InstructorDTO
+        //        {
+        //            Name = instructor.applicationUser.Name,
+        //            status = instructor.status,
+        //            Appointments = appointments,
+        //            Subjects = subjects
+        //        });
+        //    }
 
-        //    //return insDTO;
+        //    return insDTO;
         //}
 
         public bool Exists(string id)

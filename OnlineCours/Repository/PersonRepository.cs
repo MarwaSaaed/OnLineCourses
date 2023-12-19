@@ -18,19 +18,15 @@ namespace OCTW.Server.Repository
             await _context.SaveChangesAsync();
         }
 
-      
-
-        public  async Task<IEnumerable<T>> GetAllAsync(string Include)
+        public  async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _context.Set<T>().Include(Include).ToListAsync();
+            return await _context.Set<T>().ToListAsync();
         }
 
-        public  IEnumerable<T> GetByFilterAsync(Func<T, bool> predicate)
+        public async Task<T> GetByFilterAsync(Func<T, bool> predicate , string include)
         {
-            return _context.Set<T>().Where(predicate).ToList();
+            return _context.Set<T>().Include(include).Where(predicate).FirstOrDefault();
         }
-
-       
 
         // Hande By ID with in next function with FOD
 
@@ -39,7 +35,6 @@ namespace OCTW.Server.Repository
             _context.Set<T>().Update(entity);
             await _context.SaveChangesAsync();
         }
-
 
         public async Task<T> GetByPredicateAsync(Expression<Func<T, bool>> predicate, string includeProperties = "")
 

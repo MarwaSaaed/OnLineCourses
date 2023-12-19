@@ -5,15 +5,22 @@ using System.Linq.Expressions;
 
 namespace OnlineCours.Repository
 {
-    public interface IInstructorRepository
+    public interface IInstructorRepository : IPersonRepository<Instructor>
     {
-        Task<InstructorDTO> GetById(string Id);
-        Task<List<InstructorDTO>> GetByDay(int DayOfWeek);
-        Task<List<InstructorDTO>> GetAllAsync();
-        Instructor CreateAsync(Instructor entity);
-        Task UpdateAsync(Instructor entity);
+        // Get All Request to Specific Instructor by InstructorID
+
+
+        // CRUD Bridge
+        //Task<List<InstructorDTO>> GetAllAsync();
+        //Task<List<InstructorDTO>> GetByDay(int DayOfWeek);
+        //Task<InstructorDTO> GetById(string Id);
+
+
+        //Instructor CreateAsync(Instructor entity);
+        //Task UpdateAsync(Instructor entity);
+
+        //Task<List<InstructorDTO>> Get(Expression<Func<Instructor, bool>> expression);
         Task<string> Delete(string id);
-        Task<List<InstructorDTO>> Get(Expression<Func<Instructor, bool>> expression);
         bool Exists(string id);
     }
 

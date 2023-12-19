@@ -25,25 +25,23 @@ namespace OnlineCours.Controllers
             return Ok(instructors);
         }
 
-        [HttpGet("GetById/{id}")]
+        [HttpGet("GetInstructorById/{id}")]
         public async Task<ActionResult<InstructorDTO>> GetInstructorById(string id)
         {
-            var instructor = await _instructorRepository.GetById(id);
+            var instructor = await _instructorRepository.GetByFilterAsync(r=>r.applicationUserID == id , "applicationUser");
             if (instructor == null)
             {
                 return NotFound();
             }
-            return Ok(instructor);
+            InstructorDTO instructorDTO = new InstructorDTO();
+            instructorDTO.status = instructor.status;
+            instructorDTO.Name = instructor.applicationUser.Name;
+
+            return Ok(instructorDTO);
         }
 
-        [HttpPost("Create")]
-        public async Task<ActionResult<Instructor>> CreateInstructor(Instructor instructor)
-        {
-            var createdInstructor = _instructorRepository.CreateAsync(instructor);
-            return CreatedAtAction(nameof(GetInstructorById), new { id = createdInstructor.applicationUserID }, createdInstructor);
-        }
 
-        [HttpPut("Update/{id}")]
+        [HttpPut("UpdateInstructor/{id}")]
         public async Task<IActionResult> UpdateInstructor(string id, Instructor instructor)
         {
             if (id != instructor.applicationUserID)
@@ -70,19 +68,21 @@ namespace OnlineCours.Controllers
             return NoContent();
         }
 
-        [HttpDelete("Delete/{id}")]
+
+        [HttpDelete("DeleteInstructor/{id}")]
         public async Task<IActionResult> DeleteInstructor(string id)
         {
             var result = await _instructorRepository.Delete(id);
             return Ok(result);
         }
 
-        [HttpGet("day/{dayOfWeek}")]
-        public async Task<ActionResult<List<InstructorDTO>>> GetInstructorsByDay(int dayOfWeek)
-        {
-            var instructors = await _instructorRepository.GetByDay(dayOfWeek);
-            return Ok(instructors);
-        }
+
+        //[HttpGet("day/{dayOfWeek}")]
+        //public async Task<ActionResult<List<InstructorDTO>>> GetInstructorsByDay(int dayOfWeek)
+        //{
+        //    var instructors = await _instructorRepository.GetByDay(dayOfWeek);
+        //    return Ok(instructors);
+        //}
     }
 
 }

@@ -81,7 +81,7 @@ namespace OnlineCours.Controllers
 
                 }
                 _context.SaveChanges();
-                result1.Message = "sucess";
+                result1.Message = "Success";
                 result1.IsPass = true;
                 result1.Data = newUsr.UserName;
                 return Ok(result1);
@@ -183,7 +183,7 @@ namespace OnlineCours.Controllers
                         IsPass = true,
                         Data = new JwtSecurityTokenHandler().WriteToken(jtw),
                         Expairation = jtw.ValidTo,
-                        Message = "sucesss"
+                        Message = "Success"
                     });
 
                 }

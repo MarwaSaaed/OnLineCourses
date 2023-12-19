@@ -7,8 +7,8 @@ namespace OCTW.Server.Repository
         Task CreateAsync(T entity);
       
         Task UpdateAsync(T entity);
-        Task<IEnumerable<T>> GetAllAsync(string Include = null);
-        IEnumerable<T> GetByFilterAsync(Func<T, bool> predicate); 
+        Task<IEnumerable<T>> GetAllAsync();
+        Task<T> GetByFilterAsync(Func<T, bool> predicate, string include = null); 
        Task<T> GetByPredicateAsync(Expression<Func<T, bool>> predicate, string includeProperties = "");
 
 

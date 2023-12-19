@@ -4,10 +4,10 @@ namespace OnlineCours.DTO
 {
     public class InstructorDTO
     {
-        public StatusOfInstructor status { get; set; }
         public string Name { get; set; }
-        public List<Day> Appointments { get; set; }
-        public List<string> Subjects { get; set; }
+        public StatusOfInstructor status { get; set; }
+        public List<AppoinstmentDTO>? Appointments { get; set; }
+        public List<string>? Subjects { get; set; }
 
     }
 }
