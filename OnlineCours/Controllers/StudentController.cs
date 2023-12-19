@@ -42,8 +42,6 @@ namespace OnlineCours.Controllers
                 && s.InstructorID == StudentRequestToTakeSubject.InstructorId)
                 .FirstOrDefault();
 
-
-
             List<Appointment> Appointments = new List<Appointment>();
             foreach (var Appoint in StudentRequestToTakeSubject.Appoinstments)
             {
@@ -55,8 +53,6 @@ namespace OnlineCours.Controllers
                   ).FirstOrDefault();
                 Appointments.Add(Appointment);
             }
-
-
 
             Models.Request Request = new Request
             {
