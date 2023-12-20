@@ -232,5 +232,43 @@ namespace OnlineCours.Repository
             }
             return false;
         }
+
+        public async Task<string> AddInstructorSubject(InstructorSubjectDTO instructorSubjectDTO)
+        {
+            Instructor instructor = await _context.Instructors
+                             .FirstOrDefaultAsync(ins => ins.applicationUserID == instructorSubjectDTO.InstructorId);
+
+            if (instructor != null)
+            {
+                Subject subject = await _context.Subjects
+                                 .FirstOrDefaultAsync(sub => sub.Id == instructorSubjectDTO.SubjectId);
+
+                if (subject != null)
+                {
+                    InstructorSubjectBridge instructorSubjectBridge = new InstructorSubjectBridge();
+                    instructorSubjectBridge.InstructorID = instructor.applicationUserID;
+                    instructorSubjectBridge.SubjectID = subject.Id;
+
+                    instructorSubjectBridge.Appointments = new List<Appointment>();
+
+                    foreach (var instructorSubject in instructorSubjectDTO.AppoinstmentDTOs)
+                    {
+                        Appointment appointment = new Appointment
+                        {
+                            LectureDate = instructorSubject.LectureDate,
+                            DayOfWeek = instructorSubject.DayOfWeek,
+                        };
+
+                        instructorSubjectBridge.Appointments.Add(appointment);
+                    }
+
+                    _context.InstructorSubjects.Add(instructorSubjectBridge);
+
+                    await _context.SaveChangesAsync();
+                }
+            }
+            return "InstructorSubject added successfully";
+        }
+
     }
 }

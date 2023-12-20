@@ -18,7 +18,7 @@ namespace OnlineCours.Controllers
             _instructorRepository = instructorRepository;
         }
 
-        [HttpGet]
+        [HttpGet("GetAllInstructors")]
         public async Task<ActionResult<List<InstructorDTO>>> GetAllInstructors()
         {
             var instructors = await _instructorRepository.GetAllAsync();
@@ -83,6 +83,13 @@ namespace OnlineCours.Controllers
         //    var instructors = await _instructorRepository.GetByDay(dayOfWeek);
         //    return Ok(instructors);
         //}
+
+        [HttpPost("AddInstructorSubject")]
+        public async Task<ActionResult> AddInstructorSubject(InstructorSubjectDTO instructorSubjectDTO)
+        {
+            var instructors = await _instructorRepository.AddInstructorSubject(instructorSubjectDTO);
+            return Ok(instructors);
+        }
     }
 
 }
