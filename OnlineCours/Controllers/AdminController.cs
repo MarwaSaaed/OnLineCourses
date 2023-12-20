@@ -109,6 +109,7 @@ namespace OnlineCours.Controllers
             return BadRequest();
         }
 
+
         [HttpGet("GetAllSubjects")]
         public async Task<IActionResult> GetAllSubjects()
         {
@@ -130,7 +131,6 @@ namespace OnlineCours.Controllers
 
             return Ok(subjectsDTO);
         }
-
 
 
         [HttpPut("UpdateSubject/{Id}")]
@@ -159,6 +159,7 @@ namespace OnlineCours.Controllers
 
         }
 
+
         [HttpGet("GetSubject/{Id}")]
         public async Task<IActionResult> GetSubject(int Id)
         {
@@ -181,7 +182,6 @@ namespace OnlineCours.Controllers
 
 
         [HttpDelete("DeleteSubject/{Id}")]
-
         public async Task<IActionResult> DeleteSubject(int Id)
         {
             if (Id != 0)
@@ -198,10 +198,5 @@ namespace OnlineCours.Controllers
             return BadRequest("NotFound");
 
         }
-
-
-
-
-
     }
 }
