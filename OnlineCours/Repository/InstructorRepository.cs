@@ -269,6 +269,5 @@ namespace OnlineCours.Repository
             }
             return "InstructorSubject added successfully";
         }
-
     }
 }
