@@ -21,8 +21,7 @@ namespace OnlineCours.Repository
 
         //Task<List<InstructorDTO>> Get(Expression<Func<Instructor, bool>> expression);
         Task<string> Delete(string id);
+        Task<string> AddInstructorSubject(InstructorSubjectDTO instructorSubjectDTO);
         bool Exists(string id);
     }
-
-    
 }

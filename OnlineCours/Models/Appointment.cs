@@ -28,7 +28,5 @@ namespace OnlineCours.Models
         public int InstructorSubjectBridgeID { get; set; }
         public InstructorSubjectBridge InstructorSubjectBridge { get; set; }
 
-
-
     }
 }
