@@ -1,7 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineCours.Models
 {
+    [Index("Name", IsUnique = true)]
+
     public class Subject : BaseClase
     {
         public string Name { get; set; }

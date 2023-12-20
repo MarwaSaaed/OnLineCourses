@@ -15,7 +15,7 @@ namespace OnlineCours.Controllers
         private readonly IRequestAppointmentRepository _RequestAppointmentRepository;
         private readonly IRequestRepository _Request;
         private readonly IPersonRepository<Instructor> _InstructorRepository;
-        public AdminController(IPersonRepository<Instructor> InstructorRepository,IRequestRepository Request, ISubjectRepository CourseRepository, IRequestAppointmentRepository RequestAppointmentRepository) 
+        public AdminController(IPersonRepository<Instructor> InstructorRepository, IRequestRepository Request, ISubjectRepository CourseRepository, IRequestAppointmentRepository RequestAppointmentRepository)
         {
             _CourseRepository = CourseRepository;
             _RequestAppointmentRepository = RequestAppointmentRepository;
@@ -31,11 +31,11 @@ namespace OnlineCours.Controllers
                 Name = AddSubjectRequest.Name,
             };
             await _CourseRepository.CreateAsync(Subject);
-            return Ok(Subject);
+            return Ok("Created");
         }
 
         [HttpGet("GetAllStudentRequests")]
-        public async Task <IActionResult> GetAllStudentRequest() 
+        public async Task<IActionResult> GetAllStudentRequest()
         {
 
             List<RequestAppointment> RequestAppointment =
@@ -59,7 +59,7 @@ namespace OnlineCours.Controllers
 
         }
 
-        
+
         [HttpPut("RejectStudentRequest/{RequestId}")]
         public async Task<IActionResult> RejectStudentRequest(int RequestId)
         {
@@ -75,14 +75,14 @@ namespace OnlineCours.Controllers
 
         }
 
-        
+
         [HttpPut("AcceptInstructorRequest/{InstructorId}")]
         public async Task<IActionResult> AcceptInstructor(string InstructorId)
         {
             var Instructors =
                 await _InstructorRepository.GetAllAsync();
             Instructor Instructor = Instructors.FirstOrDefault(i => i.applicationUserID == InstructorId);
-            if(Instructor!=null)
+            if (Instructor != null)
             {
 
                 Instructor.status = StatusOfInstructor.Accepted;
@@ -99,7 +99,7 @@ namespace OnlineCours.Controllers
             var Instructors =
                 await _InstructorRepository.GetAllAsync();
             Instructor Instructor = Instructors.FirstOrDefault(i => i.applicationUserID == InstructorId);
-            if(Instructor!=null)
+            if (Instructor != null)
             {
 
                 Instructor.status = StatusOfInstructor.Rejected;
@@ -108,5 +108,100 @@ namespace OnlineCours.Controllers
             }
             return BadRequest();
         }
+
+        [HttpGet("GetAllSubjects")]
+        public async Task<IActionResult> GetAllSubjects()
+        {
+
+            var subjects = await _CourseRepository.GetAllAsync();
+
+            List<AddSubjectRequest> subjectsDTO = new List<AddSubjectRequest>();
+            foreach (var subject in subjects)
+            {
+                subjectsDTO.Add(new AddSubjectRequest
+                {
+                    Id = subject.Id,
+                    Name = subject.Name,
+                    Grade = subject.Grade
+                });
+
+
+            }
+
+            return Ok(subjectsDTO);
+        }
+
+
+
+        [HttpPut("UpdateSubject/{Id}")]
+        public async Task<IActionResult> UpdateSubject(int Id, AddSubjectRequest Subject)
+        {
+            if (Id == Subject.Id)
+            {
+                if (ModelState.IsValid)
+                {
+                    var subject = await _CourseRepository.GetById(Id);
+                    if (subject != null)
+                    {
+
+                        subject.Name = Subject.Name;
+                        subject.Grade = Subject.Grade;
+                        await _CourseRepository.UpdateAsync(subject);
+                        return Ok("Updated");
+                    }
+                    return BadRequest("Not Found");
+
+                }
+                return BadRequest(ModelState);
+            }
+
+            return NotFound("RequestNotFound");
+
+        }
+
+        [HttpGet("GetSubject/{Id}")]
+        public async Task<IActionResult> GetSubject(int Id)
+        {
+            if (Id != 0)
+            {
+                var subject = await _CourseRepository.GetById(Id);
+                if (subject != null)
+                {
+                    AddSubjectRequest subjectDTo = new AddSubjectRequest();
+                    subjectDTo.Id = subject.Id;
+                    subjectDTo.Name = subject.Name;
+                    subjectDTo.Grade = subject.Grade;
+                    return Ok(subjectDTo);
+                }
+                return BadRequest("Not Found");
+            }
+            return BadRequest("NotFound");
+
+        }
+
+
+        [HttpDelete("DeleteSubject/{Id}")]
+
+        public async Task<IActionResult> DeleteSubject(int Id)
+        {
+            if (Id != 0)
+            {
+                var subject = await _CourseRepository.GetById(Id);
+                if (subject != null)
+                {
+                    subject.IsDeleted = true;
+                   await _CourseRepository.Delete(subject);
+                    return Ok("Deleted");
+                }
+                return BadRequest("Not Found");
+            }
+            return BadRequest("NotFound");
+
+        }
+
+
+
+
+
     }
 }

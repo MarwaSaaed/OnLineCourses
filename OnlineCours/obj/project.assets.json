@@ -4120,19 +4120,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\menat\\.nuget\\packages\\": {}
+    "C:\\Users\\win 10\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Job\\Online Courses\\Online\\OnlineCours\\OnlineCours.csproj",
+      "projectUniqueName": "D:\\ITI_9\\Work\\OnlineCours\\Backend\\OnlineCours\\OnlineCours.csproj",
       "projectName": "OnlineCours",
-      "projectPath": "F:\\Job\\Online Courses\\Online\\OnlineCours\\OnlineCours.csproj",
-      "packagesPath": "C:\\Users\\menat\\.nuget\\packages\\",
-      "outputPath": "F:\\Job\\Online Courses\\Online\\OnlineCours\\obj\\",
+      "projectPath": "D:\\ITI_9\\Work\\OnlineCours\\Backend\\OnlineCours\\OnlineCours.csproj",
+      "packagesPath": "C:\\Users\\win 10\\.nuget\\packages\\",
+      "outputPath": "D:\\ITI_9\\Work\\OnlineCours\\Backend\\OnlineCours\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\menat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\win 10\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4208,7 +4208,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

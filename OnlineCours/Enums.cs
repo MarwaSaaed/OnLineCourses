@@ -9,8 +9,8 @@
         }
     public enum Grade
     {
-        All,
-        Secondry
+        All=1,
+        Secondry=2
     }
 
 
