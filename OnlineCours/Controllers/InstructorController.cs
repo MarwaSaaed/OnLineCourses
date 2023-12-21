@@ -76,7 +76,13 @@ namespace OnlineCours.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetRequestForInstructor/{Id}")]
+        public async Task<IActionResult> GetRequestForInstructor(string Id)
+        {
+            var Result = await _instructorRepository.GetAllRequestToByInstructorId(Id);
 
+            return Ok(Result);
+        }
         //[HttpGet("day/{dayOfWeek}")]
         //public async Task<ActionResult<List<InstructorDTO>>> GetInstructorsByDay(int dayOfWeek)
         //{

@@ -7,7 +7,7 @@ namespace OnlineCours.Repository
 {
     public interface IInstructorRepository : IPersonRepository<Instructor>
     {
-        // Get All Request to Specific Instructor by InstructorID
+        public Task<List<StudentRequestForInstructor>> GetAllRequestToByInstructorId(string InstructorId);
 
 
         // CRUD Bridge
