@@ -50,7 +50,7 @@ namespace OnlineCours.Controllers
                 Appointment Appointment = _AppointmentRepository.GetAllByFilter
                   (
                       a => a.InstructorSubjectBridgeID == InstructorSubjectBridge.Id
-                      && a.DayOfWeek == Appoint.DayOfWeek
+                      && a.DayOfWeek == (Day)int.Parse(Appoint.DayOfWeek)
                       && a.LectureDate == Appoint.LectureDate
                   ).FirstOrDefault();
                 Appointments.Add(Appointment);
