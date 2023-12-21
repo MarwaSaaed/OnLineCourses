@@ -59,7 +59,7 @@ namespace OnlineCours.Repository
                     foreach(var appointment in brid.Appointments)
                     {
                         AppoinstmentDTO appoinstmentDTO = new AppoinstmentDTO();
-                        appoinstmentDTO.DayOfWeek = appointment.DayOfWeek;
+                        appoinstmentDTO.DayOfWeek = appointment.DayOfWeek.ToString();
                         appoinstmentDTO.LectureDate = appointment.LectureDate;
                         Appointment.Add(appoinstmentDTO);
 
@@ -256,7 +256,7 @@ namespace OnlineCours.Repository
                         Appointment appointment = new Appointment
                         {
                             LectureDate = instructorSubject.LectureDate,
-                            DayOfWeek = instructorSubject.DayOfWeek,
+                            DayOfWeek = (Day) int.Parse(instructorSubject.DayOfWeek),
                         };
 
                         instructorSubjectBridge.Appointments.Add(appointment);
