@@ -84,6 +84,13 @@ namespace OnlineCours.Controllers
         //    return Ok(instructors);
         //}
 
+        [HttpGet("GetRequestForInstructor/{Id}")]
+        public async Task<IActionResult> GetRequestForInstructor(string Id)
+        {
+            var Result = await _instructorRepository.GetAllRequestToByInstructorId(Id);
+
+            return Ok(Result);
+        }
         [HttpPost("AddInstructorSubject")]
         public async Task<ActionResult> AddInstructorSubject(InstructorSubjectDTO instructorSubjectDTO)
         {

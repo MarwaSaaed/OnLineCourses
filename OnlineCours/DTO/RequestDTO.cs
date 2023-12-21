@@ -18,4 +18,14 @@ namespace OnlineCours.DTO
 
 
     }
+
+    public class StudentRequestForInstructor
+    {
+        public int RequestId { get; set; }
+        public string StudentName { get; set; }
+        public string Grade { get; set; }
+        public string SubjectName { get; set; }
+        public DateTime LectureDate { get; set; }
+        public Day DayOfWeek { get; set; }
+    }
 }
