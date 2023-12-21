@@ -1,20 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Job\\Online Courses\\Online\\OnlineCours\\OnlineCours.csproj": {}
+    "C:\\Users\\20106\\Desktop\\Menna_New\\OnLineCourses\\OnlineCours\\OnlineCours.csproj": {}
   },
   "projects": {
-    "F:\\Job\\Online Courses\\Online\\OnlineCours\\OnlineCours.csproj": {
+    "C:\\Users\\20106\\Desktop\\Menna_New\\OnLineCourses\\OnlineCours\\OnlineCours.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Job\\Online Courses\\Online\\OnlineCours\\OnlineCours.csproj",
+        "projectUniqueName": "C:\\Users\\20106\\Desktop\\Menna_New\\OnLineCourses\\OnlineCours\\OnlineCours.csproj",
         "projectName": "OnlineCours",
-        "projectPath": "F:\\Job\\Online Courses\\Online\\OnlineCours\\OnlineCours.csproj",
-        "packagesPath": "C:\\Users\\menat\\.nuget\\packages\\",
-        "outputPath": "F:\\Job\\Online Courses\\Online\\OnlineCours\\obj\\",
+        "projectPath": "C:\\Users\\20106\\Desktop\\Menna_New\\OnLineCourses\\OnlineCours\\OnlineCours.csproj",
+        "packagesPath": "C:\\Users\\20106\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\20106\\Desktop\\Menna_New\\OnLineCourses\\OnlineCours\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\DevExpress 23.1\\Components\\Offline Packages",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\menat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\20106\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 23.1.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +28,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\DevExpress 23.1\\Components\\System\\Components\\Packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -90,7 +97,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
