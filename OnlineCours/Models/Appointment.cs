@@ -18,15 +18,14 @@ namespace OnlineCours.Models
         Late,
         Canceled,
     }
-    public class Appointment :BaseClase
+    public class Appointment : BaseClase
     {
-        public DateTime LectureDate { get; set; }
-        public Day DayOfWeek { get; set;}
-        public Status? Status { get; set;}
+        public string LectureDate { get; set; }
+        public Day DayOfWeek { get; set; }
+        public Status? Status { get; set; }
 
         [ForeignKey("InstructorSubjectBridge")]
         public int InstructorSubjectBridgeID { get; set; }
         public InstructorSubjectBridge InstructorSubjectBridge { get; set; }
-
     }
 }

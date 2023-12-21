@@ -4,7 +4,7 @@ namespace OnlineCours.DTO
 {
     public class AppoinstmentDTO
     {
-        public DateTime LectureDate { get; set; }
-        public Day DayOfWeek { get; set; }
+        public string LectureDate { get; set; }
+        public string DayOfWeek { get; set; }
     }
 }

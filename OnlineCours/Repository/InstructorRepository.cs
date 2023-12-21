@@ -35,7 +35,6 @@ namespace OnlineCours.Repository
             return "Id Not Found";
         }
 
-
         public async Task<List<InstructorDTO>> GetAllAsync()
         {
             List<Instructor> instructors = _context.Instructors
@@ -59,7 +58,7 @@ namespace OnlineCours.Repository
                     foreach(var appointment in brid.Appointments)
                     {
                         AppoinstmentDTO appoinstmentDTO = new AppoinstmentDTO();
-                        appoinstmentDTO.DayOfWeek = appointment.DayOfWeek;
+                        appoinstmentDTO.DayOfWeek = appointment.DayOfWeek.ToString();
                         appoinstmentDTO.LectureDate = appointment.LectureDate;
                         Appointment.Add(appoinstmentDTO);
 
@@ -79,7 +78,6 @@ namespace OnlineCours.Repository
             return insDTO;
         }
 
-
         public async Task<InstructorDTO> GetById(string Id)
         {
             Instructor Instructor = _context.Instructors
@@ -98,7 +96,7 @@ namespace OnlineCours.Repository
                 foreach (var appointment in brid.Appointments)
                 {
                     AppoinstmentDTO appoinstmentDTO = new AppoinstmentDTO();
-                    appoinstmentDTO.DayOfWeek = appointment.DayOfWeek;
+                    appoinstmentDTO.DayOfWeek = appointment.DayOfWeek.ToString();
                     appoinstmentDTO.LectureDate = appointment.LectureDate;
                     Appointment.Add(appoinstmentDTO);
 
@@ -113,8 +111,6 @@ namespace OnlineCours.Repository
             
             return insDTO;
         }
-
-
 
         public async Task<List<InstructorDTO>> Get(Expression<Func<Instructor, bool>> expression)
         {
@@ -132,7 +128,7 @@ namespace OnlineCours.Repository
                     foreach (var appointment in brid.Appointments)
                     {
                         AppoinstmentDTO appoinstmentDTO = new AppoinstmentDTO();
-                        appoinstmentDTO.DayOfWeek = appointment.DayOfWeek;
+                        appoinstmentDTO.DayOfWeek = appointment.DayOfWeek.ToString();
                         appoinstmentDTO.LectureDate = appointment.LectureDate;
                         Appointment.Add(appoinstmentDTO);
 
@@ -232,7 +228,7 @@ namespace OnlineCours.Repository
                     .Select(appointment => new AppoinstmentDTO
                     {
                         LectureDate = appointment.LectureDate,
-                        DayOfWeek = appointment.DayOfWeek
+                        DayOfWeek = appointment.DayOfWeek.ToString()
                     }))
                 .ToList(),
                 Subjects = instructor.InstructorSubjectBridge
@@ -277,7 +273,7 @@ namespace OnlineCours.Repository
                         Appointment appointment = new Appointment
                         {
                             LectureDate = instructorSubject.LectureDate,
-                            DayOfWeek = instructorSubject.DayOfWeek,
+                            DayOfWeek = (Day)int.Parse(instructorSubject.DayOfWeek),
                         };
 
                         instructorSubjectBridge.Appointments.Add(appointment);
