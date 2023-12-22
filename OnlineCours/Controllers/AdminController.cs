@@ -15,13 +15,17 @@ namespace OnlineCours.Controllers
         private readonly IRequestAppointmentRepository _RequestAppointmentRepository;
         private readonly IRequestRepository _Request;
         private readonly IPersonRepository<Instructor> _InstructorRepository;
-        public AdminController(IPersonRepository<Instructor> InstructorRepository, IRequestRepository Request, ISubjectRepository CourseRepository, IRequestAppointmentRepository RequestAppointmentRepository)
+        public AdminController(IPersonRepository<Instructor> InstructorRepository, 
+            IRequestRepository Request, ISubjectRepository CourseRepository,
+            IRequestAppointmentRepository RequestAppointmentRepository)
         {
             _CourseRepository = CourseRepository;
             _RequestAppointmentRepository = RequestAppointmentRepository;
             _Request = Request;
             _InstructorRepository = InstructorRepository;
         }
+
+
         [HttpPost("AddSubject")]
         public async Task<IActionResult> AddSubject(AddSubjectRequest AddSubjectRequest)
         {
@@ -198,5 +202,6 @@ namespace OnlineCours.Controllers
             return BadRequest("NotFound");
 
         }
+
     }
 }

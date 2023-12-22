@@ -25,6 +25,7 @@ namespace OnlineCours.Controllers
             return Ok(instructors);
         }
 
+
         [HttpGet("GetInstructorById/{id}")]
         public async Task<ActionResult<InstructorDTO>> GetInstructorById(string id)
         {
