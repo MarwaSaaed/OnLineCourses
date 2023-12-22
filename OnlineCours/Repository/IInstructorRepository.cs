@@ -11,15 +11,14 @@ namespace OnlineCours.Repository
 
 
         // CRUD Bridge
-        //Task<List<InstructorDTO>> GetAllAsync();
-        //Task<List<InstructorDTO>> GetByDay(int DayOfWeek);
-        //Task<InstructorDTO> GetById(string Id);
+        Task<List<InstructorDTO>> GetAllAsync();
+        Task<List<InstructorDTO>> GetByDay(int DayOfWeek);
+        Task<List<InstructorDTO>> GetBySubject(int SubjectId);
+        Task<InstructorDTO> GetById(string Id);
 
 
-        //Instructor CreateAsync(Instructor entity);
-        //Task UpdateAsync(Instructor entity);
 
-        //Task<List<InstructorDTO>> Get(Expression<Func<Instructor, bool>> expression);
+        Task<List<InstructorDTO>> Get(Expression<Func<Instructor, bool>> expression);
         Task<string> Delete(string id);
         Task<string> AddInstructorSubject(InstructorSubjectDTO instructorSubjectDTO);
         bool Exists(string id);

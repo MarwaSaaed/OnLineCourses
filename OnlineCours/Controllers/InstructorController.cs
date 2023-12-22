@@ -28,16 +28,14 @@ namespace OnlineCours.Controllers
         [HttpGet("GetInstructorById/{id}")]
         public async Task<ActionResult<InstructorDTO>> GetInstructorById(string id)
         {
-            var instructor = await _instructorRepository.GetByFilterAsync(r=>r.applicationUserID == id , "applicationUser");
+            var instructor = await _instructorRepository.GetById(id);
             if (instructor == null)
             {
                 return NotFound();
             }
-            InstructorDTO instructorDTO = new InstructorDTO();
-            instructorDTO.status = instructor.status;
-            instructorDTO.Name = instructor.applicationUser.Name;
+            
 
-            return Ok(instructorDTO);
+            return Ok(instructor);
         }
 
 
@@ -96,6 +94,15 @@ namespace OnlineCours.Controllers
         {
             var instructors = await _instructorRepository.AddInstructorSubject(instructorSubjectDTO);
             return Ok(instructors);
+        }
+
+
+        [HttpGet("GetBySubject/{SubjectId}")]
+        public async Task<IActionResult> GetInstructorBySubject(int SubjectId)
+        {
+            var Result = await _instructorRepository.GetBySubject(SubjectId);
+
+            return Ok(Result);
         }
     }
 

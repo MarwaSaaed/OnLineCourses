@@ -81,10 +81,13 @@ namespace OnlineCours.Repository
         public async Task<InstructorDTO> GetById(string Id)
         {
             Instructor Instructor = _context.Instructors
-                .Include(x => x.InstructorSubjectBridge)
-                .ThenInclude(x => new { x.Subject, x.Instructor })
-                .Include(x => x.applicationUser)
-                .FirstOrDefault(Instructor => Instructor.applicationUserID == Id);
+            .Include(x => x.InstructorSubjectBridge)
+                .ThenInclude(x => x.Subject)
+            .Include(x => x.InstructorSubjectBridge)
+                .ThenInclude(x => x.Appointments)
+            .Include(x => x.applicationUser)
+            .FirstOrDefault(i => i.applicationUserID == Id);
+
 
             InstructorDTO insDTO = new InstructorDTO();
 
@@ -307,6 +310,45 @@ namespace OnlineCours.Repository
                 SubjectName = r.Appointment.InstructorSubjectBridge.Subject.Name
             }).ToListAsync();
             return FinalResult;
+        }
+
+        public async Task<List<InstructorDTO>> GetBySubject(int SubjectId)
+        {
+            var instructors = _context.InstructorSubjects
+            .Where(bridge => bridge.SubjectID == SubjectId)
+            .Include(x=>x.Instructor)
+            .ThenInclude(x=>x.InstructorSubjectBridge)
+            .ThenInclude(x=>x.Subject)
+            .Include(x => x.Instructor)
+            .ThenInclude(x => x.applicationUser)
+            .Include(x => x.Instructor)
+            .ThenInclude(x => x.InstructorSubjectBridge)
+            .ThenInclude(x => x.Appointments)
+            .Include(x => x.Instructor)
+            .ThenInclude(x => x.InstructorSubjectBridge)
+            .ThenInclude(x => x.Subject)
+            .Select(bridge => bridge.Instructor)
+            
+            .ToList();
+
+            List<InstructorDTO> insDTO = instructors.Select(instructor => new InstructorDTO
+            {
+                Name = instructor.applicationUser.UserName, 
+                status = instructor.status,
+                Appointments = instructor.InstructorSubjectBridge
+                .SelectMany(bridge => bridge.Appointments
+                    .Select(appointment => new AppoinstmentDTO
+                    {
+                        LectureDate = appointment.LectureDate,
+                        DayOfWeek = appointment.DayOfWeek.ToString()
+                    }))
+                .ToList(),
+                Subjects = instructor.InstructorSubjectBridge
+                .Select(bridge => bridge.Subject?.Name)
+                .ToList()
+            }).ToList();
+
+            return insDTO;
         }
     }
 }
