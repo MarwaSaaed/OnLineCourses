@@ -316,9 +316,9 @@ namespace OnlineCours.Repository
         {
             var instructors = _context.InstructorSubjects
             .Where(bridge => bridge.SubjectID == SubjectId)
-            .Include(x=>x.Instructor)
-            .ThenInclude(x=>x.InstructorSubjectBridge)
-            .ThenInclude(x=>x.Subject)
+            .Include(x => x.Instructor)
+            .ThenInclude(x => x.InstructorSubjectBridge)
+            .ThenInclude(x => x.Subject)
             .Include(x => x.Instructor)
             .ThenInclude(x => x.applicationUser)
             .Include(x => x.Instructor)
@@ -328,12 +328,14 @@ namespace OnlineCours.Repository
             .ThenInclude(x => x.InstructorSubjectBridge)
             .ThenInclude(x => x.Subject)
             .Select(bridge => bridge.Instructor)
-            
+
             .ToList();
+
 
             List<InstructorDTO> insDTO = instructors.Select(instructor => new InstructorDTO
             {
-                Name = instructor.applicationUser.UserName, 
+                Name = instructor.applicationUser.UserName,
+                InstructorID = instructor.applicationUserID,
                 status = instructor.status,
                 Appointments = instructor.InstructorSubjectBridge
                 .SelectMany(bridge => bridge.Appointments
@@ -343,9 +345,6 @@ namespace OnlineCours.Repository
                         DayOfWeek = appointment.DayOfWeek.ToString()
                     }))
                 .ToList(),
-                Subjects = instructor.InstructorSubjectBridge
-                .Select(bridge => bridge.Subject?.Name)
-                .ToList()
             }).ToList();
 
             return insDTO;

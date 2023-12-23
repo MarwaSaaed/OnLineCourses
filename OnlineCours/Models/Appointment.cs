@@ -4,13 +4,13 @@ namespace OnlineCours.Models
 {
     public enum Day
     {
-        Sunday,
-        Monday,
-        Tuesday,
-        Wednesday,
-        Thursday,
-        Friday,
-        Saturday
+        الاحد,
+        الاثنين,
+        الثلاثاء,
+        الاربعاء,
+        الخميس,
+        الجمعه,
+        السبت
     }
     public enum Status
     {
