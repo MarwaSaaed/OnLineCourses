@@ -35,10 +35,10 @@ namespace OnlineCours.Controllers
         }
 
         [HttpPost("StudentRequestToTakeSubject")]
-        public  async Task<IActionResult> RequestSubject(StudentRequestToTakeSubject StudentRequestToTakeSubject)
+        public async Task<IActionResult> RequestSubject(StudentRequestToTakeSubject StudentRequestToTakeSubject)
         {
             InstructorSubjectBridge InstructorSubjectBridge = _InstructorSubjectBridgeRepository.
-                GetAllByFilter(s=>s.SubjectID == StudentRequestToTakeSubject.SubjectId
+                GetAllByFilter(s => s.SubjectID == StudentRequestToTakeSubject.SubjectId
                 && s.InstructorID == StudentRequestToTakeSubject.InstructorId)
                 .FirstOrDefault();
 
@@ -47,13 +47,27 @@ namespace OnlineCours.Controllers
             List<Appointment> Appointments = new List<Appointment>();
             foreach (var Appoint in StudentRequestToTakeSubject.Appoinstments)
             {
-                Appointment Appointment = _AppointmentRepository.GetAllByFilter
-                  (
-                      a => a.InstructorSubjectBridgeID == InstructorSubjectBridge.Id
-                      && a.DayOfWeek == (Day)int.Parse(Appoint.DayOfWeek)
-                      && a.LectureDate == Appoint.LectureDate
-                  ).FirstOrDefault();
-                Appointments.Add(Appointment);
+                if (Enum.TryParse(typeof(Day), Appoint.DayOfWeek, out object dayEnumValue))
+                {
+                    Day day = (Day)dayEnumValue;
+
+                    Appointment Appointment = _AppointmentRepository.GetAllByFilter
+                    (
+                        a => a.InstructorSubjectBridgeID == InstructorSubjectBridge.Id
+                        && a.DayOfWeek == day
+                        && a.LectureDate == Appoint.LectureDate
+                    ).FirstOrDefault();
+
+                    Appointments.Add(Appointment);
+                }
+
+                //Appointment Appointment = _AppointmentRepository.GetAllByFilter
+                //  (
+                //      a => a.InstructorSubjectBridgeID == InstructorSubjectBridge.Id
+                //      && a.DayOfWeek == (Day)int.Parse(Appoint.DayOfWeek)
+                //      && a.LectureDate == Appoint.LectureDate
+                //  ).FirstOrDefault();
+                //Appointments.Add(Appointment);
             }
 
 
@@ -65,8 +79,8 @@ namespace OnlineCours.Controllers
             };
 
 
-           await _RequestRepository.CreateAsync(Request);
-            foreach(var Appointment in Appointments) 
+            await _RequestRepository.CreateAsync(Request);
+            foreach (var Appointment in Appointments)
             {
 
                 RequestAppointment RequestAppointment = new RequestAppointment
@@ -79,8 +93,9 @@ namespace OnlineCours.Controllers
 
 
             return Ok(new Result { Message = "Created" });
-                
+
         }
+
 
 
         [HttpGet("GetStudentSubject")]
