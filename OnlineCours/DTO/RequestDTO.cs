@@ -26,6 +26,6 @@ namespace OnlineCours.DTO
         public string Grade { get; set; }
         public string SubjectName { get; set; }
         public string LectureDate { get; set; }
-        public Day DayOfWeek { get; set; }
+        public string DayOfWeek { get; set; }
     }
 }
