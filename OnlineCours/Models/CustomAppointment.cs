@@ -2,7 +2,7 @@
 
 namespace OnlineCours.Models
 {
-    public class Appointment : BaseClase
+    public class CustomAppointment : BaseClase
     {
         public string LectureDate { get; set; }
         public Day DayOfWeek { get; set; }

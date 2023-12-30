@@ -9,8 +9,8 @@ namespace OnlineCours.Models
         public Request? Request { get; set; }
         
 
-        [ForeignKey("Appointment")]
-        public int AppointmentID { get; set; }
-        public Appointment? Appointment { get; set; }
+        [ForeignKey("CustomAppointment")]
+        public int CustomAppointmentID { get; set; }
+        public CustomAppointment? CustomAppointment { get; set; }
     }
 }
