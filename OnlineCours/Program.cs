@@ -60,6 +60,7 @@ namespace OnlineCours
             builder.Services.AddScoped<IInstructorSubjectBridgeRepository, InstructorSubjectBridgeReposirtory>();
 
             builder.Services.AddScoped<IPersonRepository<Instructor>, PersonRepository<Instructor>>();
+            builder.Services.AddScoped<IRepository<CustomAppointment>, Repository<CustomAppointment>>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

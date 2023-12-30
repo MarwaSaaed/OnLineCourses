@@ -19,6 +19,22 @@
         University,
     }
 
+    public enum Day
+    {
+        الاحد,
+        الاثنين,
+        الثلاثاء,
+        الاربعاء,
+        الخميس,
+        الجمعه,
+        السبت
+    }
+    public enum Status
+    {
+        OnTime,
+        Late,
+        Canceled,
+    }
 
 
 }
