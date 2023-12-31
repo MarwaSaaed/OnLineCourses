@@ -14,10 +14,10 @@ namespace OnlineCours.Repository
         public async Task<List<RequestAppointment>> GetAllRequest()
         {
             List<RequestAppointment> RequestAppointment = await _Context.RequestAppointments
-                .Include(r=>r.Appointment)
+                .Include(r=>r.CustomAppointment)
                 .ThenInclude(r=>r.InstructorSubjectBridge)
                 .ThenInclude(r=>r.Instructor)
-                .Include(r => r.Appointment)
+                .Include(r => r.CustomAppointment)
                 .ThenInclude(r => r.InstructorSubjectBridge)
                 .ThenInclude(r => r.Subject).ToListAsync();
             return RequestAppointment;

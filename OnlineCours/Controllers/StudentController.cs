@@ -18,13 +18,16 @@ namespace OnlineCours.Controllers
         public readonly IInstructorSubjectBridgeRepository _InstructorSubjectBridgeRepository;
         public readonly IRequestAppointmentRepository _RequestAppointmentRepository;
         public readonly ISubjectRepository _SubjectRepository;
+        public readonly IRepository<CustomAppointment> _customAppointment;
+
         public StudentController
             (
                 IRequestRepository RequestRepository,
                 IAppointmentRepositroy AppointmentRepository,
                 IInstructorSubjectBridgeRepository InstructorSubjectBridgeRepository,
                 IRequestAppointmentRepository RequestAppointmentRepository,
-                ISubjectRepository SubjectRepository
+                ISubjectRepository SubjectRepository,
+                IRepository<CustomAppointment> CustomAppointment
             ) 
         {
             _RequestRepository = RequestRepository;
@@ -32,55 +35,67 @@ namespace OnlineCours.Controllers
             _InstructorSubjectBridgeRepository = InstructorSubjectBridgeRepository;
             _RequestAppointmentRepository = RequestAppointmentRepository;
             _SubjectRepository = SubjectRepository;
+            _customAppointment = CustomAppointment;
         }
 
         [HttpPost("StudentRequestToTakeSubject")]
-        public  async Task<IActionResult> RequestSubject(StudentRequestToTakeSubject StudentRequestToTakeSubject)
+        public async Task<IActionResult> RequestSubject(StudentRequestToTakeSubject StudentRequestToTakeSubject)
         {
             InstructorSubjectBridge InstructorSubjectBridge = _InstructorSubjectBridgeRepository.
-                GetAllByFilter(s=>s.SubjectID == StudentRequestToTakeSubject.SubjectId
+                GetAllByFilter(s => s.SubjectID == StudentRequestToTakeSubject.SubjectId
                 && s.InstructorID == StudentRequestToTakeSubject.InstructorId)
                 .FirstOrDefault();
-
 
 
             List<Appointment> Appointments = new List<Appointment>();
             foreach (var Appoint in StudentRequestToTakeSubject.Appoinstments)
             {
-                Appointment Appointment = _AppointmentRepository.GetAllByFilter
-                  (
-                      a => a.InstructorSubjectBridgeID == InstructorSubjectBridge.Id
-                      && a.DayOfWeek == (Day)int.Parse(Appoint.DayOfWeek)
-                      && a.LectureDate == Appoint.LectureDate
-                  ).FirstOrDefault();
-                Appointments.Add(Appointment);
+                if (Enum.TryParse(typeof(Day), Appoint.DayOfWeek, out object dayEnumValue))
+                {
+                    Day day = (Day)dayEnumValue;
+
+                    Appointment Appointment = _AppointmentRepository.GetAllByFilter
+                    (
+                        a => a.InstructorSubjectBridgeID == InstructorSubjectBridge.Id
+                        && a.DayOfWeek == day
+                        && a.LectureDate == Appoint.LectureDate
+                    ).FirstOrDefault();
+
+                    Appointments.Add(Appointment);
+                }
             }
-
-
 
             Models.Request Request = new Request
             {
                 Grade = StudentRequestToTakeSubject.Grade,
                 StudentID = StudentRequestToTakeSubject.StudentId,
+                NumberOfHouers = StudentRequestToTakeSubject.NumberOfHouers,
             };
 
-
-           await _RequestRepository.CreateAsync(Request);
-            foreach(var Appointment in Appointments) 
+            await _RequestRepository.CreateAsync(Request);
+            foreach (var Appointment in Appointments)
             {
+                CustomAppointment customAppointment = new CustomAppointment
+                {
+                    DayOfWeek = Appointment.DayOfWeek,
+                    InstructorSubjectBridgeID = Appointment.InstructorSubjectBridgeID,
+                    InstructorSubjectBridge = Appointment.InstructorSubjectBridge,
+                    LectureDate = Appointment.LectureDate,
+                    Status = Appointment.Status,
+                    IsDeleted = Appointment.IsDeleted,
+                };
+                await _customAppointment.CreateAsync(customAppointment);
 
                 RequestAppointment RequestAppointment = new RequestAppointment
                 {
-                    AppointmentID = Appointment.Id,
+                    CustomAppointmentID = customAppointment.Id,
                     RequestID = Request.Id,
                 };
                 await _RequestAppointmentRepository.CreateAsync(RequestAppointment);
             }
-
-
             return Ok(new Result { Message = "Created" });
-                
         }
+
 
 
         [HttpGet("GetStudentSubject")]

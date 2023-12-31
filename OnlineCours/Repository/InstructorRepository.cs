@@ -295,22 +295,22 @@ namespace OnlineCours.Repository
         public async Task<List<StudentRequestForInstructor>> GetAllRequestToByInstructorId(string InstructorId)
         {
             var Query = _context.RequestAppointments
-                .Include(i => i.Appointment)
+                .Include(i => i.CustomAppointment)
                 .ThenInclude(i => i.InstructorSubjectBridge)
                 .ThenInclude(i => i.Instructor);
 
-            var Result = Query.Where(i => i.Appointment.InstructorSubjectBridge.InstructorID == InstructorId);
+            var Result = Query.Where(i => i.CustomAppointment.InstructorSubjectBridge.InstructorID == InstructorId);
             Result = Result
                 .Include(r => r.Request)
                 .ThenInclude(s => s.Student);
             var FinalResult = await Result.Select(r => new StudentRequestForInstructor
             {
-                DayOfWeek = r.Appointment.DayOfWeek,
+                DayOfWeek = r.CustomAppointment.DayOfWeek.ToString(),
                 Grade = r.Request.Grade,
-                LectureDate = r.Appointment.LectureDate,
+                LectureDate = r.CustomAppointment.LectureDate,
                 RequestId = r.RequestID,
                 StudentName = r.Request.Student.ApplicationUser.Name,
-                SubjectName = r.Appointment.InstructorSubjectBridge.Subject.Name
+                SubjectName = r.CustomAppointment.InstructorSubjectBridge.Subject.Name
             }).ToListAsync();
             return FinalResult;
         }
@@ -319,9 +319,9 @@ namespace OnlineCours.Repository
         {
             var instructors = _context.InstructorSubjects
             .Where(bridge => bridge.SubjectID == SubjectId)
-            .Include(x=>x.Instructor)
-            .ThenInclude(x=>x.InstructorSubjectBridge)
-            .ThenInclude(x=>x.Subject)
+            .Include(x => x.Instructor)
+            .ThenInclude(x => x.InstructorSubjectBridge)
+            .ThenInclude(x => x.Subject)
             .Include(x => x.Instructor)
             .ThenInclude(x => x.applicationUser)
             .Include(x => x.Instructor)
@@ -331,12 +331,14 @@ namespace OnlineCours.Repository
             .ThenInclude(x => x.InstructorSubjectBridge)
             .ThenInclude(x => x.Subject)
             .Select(bridge => bridge.Instructor)
-            
+
             .ToList();
+
 
             List<InstructorDTO> insDTO = instructors.Select(instructor => new InstructorDTO
             {
-                Name = instructor.applicationUser.UserName, 
+                Name = instructor.applicationUser.UserName,
+                InstructorID = instructor.applicationUserID,
                 status = instructor.status,
                 Appointments = instructor.InstructorSubjectBridge
                 .SelectMany(bridge => bridge.Appointments
@@ -346,9 +348,6 @@ namespace OnlineCours.Repository
                         DayOfWeek = appointment.DayOfWeek.ToString()
                     }))
                 .ToList(),
-                Subjects = instructor.InstructorSubjectBridge
-                .Select(bridge => bridge.Subject?.Name)
-                .ToList()
             }).ToList();
 
             return insDTO;

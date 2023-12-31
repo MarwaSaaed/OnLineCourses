@@ -17,10 +17,10 @@ namespace OnlineCours.Repository
             var query = await _Context.RequestAppointments
                 .Include(r => r.Request)
                 .Where(r => r.Request.StudentID == StudentId)
-                .Include(r => r.Appointment)
+                .Include(r => r.CustomAppointment)
                 .ThenInclude(r => r.InstructorSubjectBridge)
                 .ThenInclude(r => r.Subject).ToListAsync();
-            return query.Select(s => s.Appointment.InstructorSubjectBridge.Subject).ToList();
+            return query.Select(s => s.CustomAppointment.InstructorSubjectBridge.Subject).ToList();
 
         }
     }
