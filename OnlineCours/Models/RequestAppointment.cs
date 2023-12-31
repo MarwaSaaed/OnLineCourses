@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace OnlineCours.Models
 {
@@ -7,8 +8,6 @@ namespace OnlineCours.Models
         [ForeignKey("Request")]
         public int RequestID { get; set; }
         public Request? Request { get; set; }
-        
-
         [ForeignKey("CustomAppointment")]
         public int CustomAppointmentID { get; set; }
         public CustomAppointment? CustomAppointment { get; set; }

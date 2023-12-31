@@ -24,7 +24,19 @@ namespace OnlineCours.Controllers
             var instructors = await _instructorRepository.GetAllAsync();
             return Ok(instructors);
         }
+        [HttpGet("GetAllAcceptedInstructors")]
+        public async Task<ActionResult<List<InstructorDTO>>> GetAllAcceptedInstructors()
+        {
+            var instructors = await _instructorRepository.GetAllAcceptedInstructors();
+            return Ok(instructors);
+        }
 
+        [HttpGet("GetAllPendingInstructors")]
+        public async Task<ActionResult<List<InstructorDTO>>> GetAllPendingInstructors()
+        {
+            var instructors = await _instructorRepository.GetAllPendingInstructoresAsync();
+            return Ok(instructors);
+        }
 
         [HttpGet("GetInstructorById/{id}")]
         public async Task<ActionResult<InstructorDTO>> GetInstructorById(string id)
@@ -106,6 +118,19 @@ namespace OnlineCours.Controllers
 
             return Ok(Result);
         }
+        //[HttpPut("AcceptInstructor/{Id}")]
+        //public async Task<IActionResult> GetInstructorBySubject(string Id)
+        //{
+        //    var instrucor =await _instructorRepository.GetById(Id);
+        //    if(instrucor!=null)
+        //    {
+        //         instrucor.status = StatusOfInstructor.Accepted;
+        //        I
+        //         await _instructorRepository.UpdateAsync(instrucor);
+
+        //    }
+        //    return Ok(Result);
+        //}
     }
 
 }

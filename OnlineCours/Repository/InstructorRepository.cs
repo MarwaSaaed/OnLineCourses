@@ -68,7 +68,10 @@ namespace OnlineCours.Repository
 
                 insDTO.Add(new InstructorDTO
                 {
+                    Id=instructor.applicationUserID,
                     Name = instructor.applicationUser.Name,
+                    Email=instructor.applicationUser.Email,
+                    Phone=instructor.applicationUser.PhoneNumber,
                     status = instructor.status,
                     Appointments = Appointment,
                     Subjects = subjects
@@ -349,5 +352,63 @@ namespace OnlineCours.Repository
 
             return insDTO;
         }
+
+        public async Task<List<InstructorDTO>> GetAllPendingInstructoresAsync()
+        {
+            List<Instructor> instructors =await _context.Instructors
+            .Include(x => x.applicationUser)
+             .Where(x=>x.status==StatusOfInstructor.Pendding).ToListAsync();
+
+
+            List<InstructorDTO> insDTO = new List<InstructorDTO>();
+
+            foreach (var instructor in instructors)
+            {
+                
+            
+       
+                insDTO.Add(new InstructorDTO
+                {
+                    Id = instructor.applicationUserID,
+                    Name = instructor.applicationUser.Name,
+                    Email = instructor.applicationUser.Email,
+                    Phone = instructor.applicationUser.PhoneNumber,
+                    status = instructor.status,
+                   
+                });
+            }
+
+            return insDTO;
+        }
+
+        public async Task<List<InstructorDTO>> GetAllAcceptedInstructors()
+        {
+            List<Instructor> instructors = await _context.Instructors
+            .Include(x => x.applicationUser)
+             .Where(x => x.status == StatusOfInstructor.Accepted).ToListAsync();
+
+
+            List<InstructorDTO> insDTO = new List<InstructorDTO>();
+
+            foreach (var instructor in instructors)
+            {
+
+
+
+                insDTO.Add(new InstructorDTO
+                {
+                    Id = instructor.applicationUserID,
+                    Name = instructor.applicationUser.Name,
+                    Email = instructor.applicationUser.Email,
+                    Phone = instructor.applicationUser.PhoneNumber,
+                    status = instructor.status,
+
+                });
+            }
+
+            return insDTO;
+        }
+
+
     }
 }
