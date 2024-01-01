@@ -20,7 +20,7 @@ namespace OnlineCours.Controllers
 
         [HttpGet("GetAllInstructors")]
         public async Task<ActionResult<List<InstructorDTO>>> GetAllInstructors()
-        {
+        { 
             var instructors = await _instructorRepository.GetAllAsync();
             return Ok(instructors);
         }
