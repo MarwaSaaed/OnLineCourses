@@ -47,16 +47,15 @@ namespace OnlineCours.Controllers
             return Ok(RequestAppointment);
         }
 
-
         [HttpPut("AcceptStudentRequest/{RequestId}")]
         public async Task<IActionResult> AcceptStudentRequest(int RequestId)
         {
-            var Request = await _Request.GetById(RequestId);
+            var allRequest = await _Request.GetAllAsync();
+            var Request = allRequest.FirstOrDefault(rqu => rqu.Id == RequestId);
             if (Request != null)
             {
-
                 Request.status = StatusOfStudent.Accepted;
-                _Request.UpdateAsync(Request);
+                await _Request.UpdateAsync(Request);
                 return Ok(Request);
             }
             return NotFound("RequestNotFound");
