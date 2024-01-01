@@ -14,10 +14,13 @@ namespace OnlineCours.Repository
 {
     public class InstructorRepository :PersonRepository<Instructor> , IInstructorRepository
     {
+        private readonly IRequestAppointmentRepository _RequestAppointmentRepository;
+
         Context _context { get; set; }
-        public InstructorRepository(Context context) : base(context)
+        public InstructorRepository(Context context, IRequestAppointmentRepository requestAppointmentRepository) : base(context)
         {
             _context = context;
+            _RequestAppointmentRepository = requestAppointmentRepository;
         }
 
         public async Task<string> Delete(string id)
@@ -55,7 +58,7 @@ namespace OnlineCours.Repository
 
                 foreach (var brid in BridgeList)
                 {
-                    foreach(var appointment in brid.Appointments)
+                    foreach (var appointment in brid.Appointments)
                     {
                         AppoinstmentDTO appoinstmentDTO = new AppoinstmentDTO();
                         appoinstmentDTO.DayOfWeek = appointment.DayOfWeek.ToString();
@@ -68,10 +71,10 @@ namespace OnlineCours.Repository
 
                 insDTO.Add(new InstructorDTO
                 {
-                    Id=instructor.applicationUserID,
+                    Id = instructor.applicationUserID,
                     Name = instructor.applicationUser.Name,
-                    Email=instructor.applicationUser.Email,
-                    Phone=instructor.applicationUser.PhoneNumber,
+                    Email = instructor.applicationUser.Email,
+                    Phone = instructor.applicationUser.PhoneNumber,
                     status = instructor.status,
                     Appointments = Appointment,
                     Subjects = subjects
@@ -318,39 +321,44 @@ namespace OnlineCours.Repository
         public async Task<List<InstructorDTO>> GetBySubject(int SubjectId)
         {
             var instructors = _context.InstructorSubjects
-            .Where(bridge => bridge.SubjectID == SubjectId)
-            .Include(x => x.Instructor)
-            .ThenInclude(x => x.InstructorSubjectBridge)
-            .ThenInclude(x => x.Subject)
-            .Include(x => x.Instructor)
-            .ThenInclude(x => x.applicationUser)
-            .Include(x => x.Instructor)
-            .ThenInclude(x => x.InstructorSubjectBridge)
-            .ThenInclude(x => x.Appointments)
-            .Include(x => x.Instructor)
-            .ThenInclude(x => x.InstructorSubjectBridge)
-            .ThenInclude(x => x.Subject)
-            .Select(bridge => bridge.Instructor)
-
-            .ToList();
-
+                .Where(bridge => bridge.SubjectID == SubjectId)
+                .Include(x => x.Instructor)
+                .ThenInclude(x => x.InstructorSubjectBridge)
+                .ThenInclude(x => x.Subject)
+                .Include(x => x.Instructor)
+                .ThenInclude(x => x.applicationUser)
+                .Include(x => x.Instructor)
+                .ThenInclude(x => x.InstructorSubjectBridge)
+                .ThenInclude(x => x.Appointments)
+                .ToList();
 
             List<InstructorDTO> insDTO = instructors.Select(instructor => new InstructorDTO
             {
-                Name = instructor.applicationUser.UserName,
-                InstructorID = instructor.applicationUserID,
-                status = instructor.status,
-                Appointments = instructor.InstructorSubjectBridge
-                .SelectMany(bridge => bridge.Appointments
-                    .Select(appointment => new AppoinstmentDTO
-                    {
-                        LectureDate = appointment.LectureDate,
-                        DayOfWeek = appointment.DayOfWeek.ToString()
-                    }))
-                .ToList(),
+                Name = instructor.Instructor.applicationUser.UserName,
+                InstructorID = instructor.Instructor.applicationUserID,
+                status = instructor.Instructor.status,
+                Appointments = instructor.Instructor.InstructorSubjectBridge
+                    .SelectMany(bridge => bridge.Appointments
+                        .Where(appointment => !IsInstructorAppointmentRequestedByStudent(appointment, appointment.InstructorSubjectBridgeID))
+                        .Select(appointment => new AppoinstmentDTO
+                        {
+                            LectureDate = appointment.LectureDate,
+                            DayOfWeek = appointment.DayOfWeek.ToString()
+                        }))
+                    .ToList(),
             }).ToList();
 
             return insDTO;
+        }
+
+        private bool IsInstructorAppointmentRequestedByStudent(Appointment instructorAppointment, int instructorSubjectBridgeId)
+        {
+            var flag = _context.CustomAppointments
+                .Any(ca => ca.InstructorSubjectBridgeID == instructorSubjectBridgeId &&
+                           (ca.DayOfWeek == instructorAppointment.DayOfWeek || ca.LectureDate == instructorAppointment.LectureDate));
+
+            Console.WriteLine(flag);
+            return flag;
         }
 
         public async Task<List<InstructorDTO>> GetAllPendingInstructoresAsync()
