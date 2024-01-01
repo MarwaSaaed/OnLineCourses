@@ -18,6 +18,7 @@ namespace OnlineCours.Controllers
         public readonly IInstructorSubjectBridgeRepository _InstructorSubjectBridgeRepository;
         public readonly IRequestAppointmentRepository _RequestAppointmentRepository;
         public readonly ISubjectRepository _SubjectRepository;
+        public readonly IRequestRepository _requestReopsitory;
         public readonly IRepository<CustomAppointment> _customAppointment;
 
         public StudentController
@@ -27,7 +28,8 @@ namespace OnlineCours.Controllers
                 IInstructorSubjectBridgeRepository InstructorSubjectBridgeRepository,
                 IRequestAppointmentRepository RequestAppointmentRepository,
                 ISubjectRepository SubjectRepository,
-                IRepository<CustomAppointment> CustomAppointment
+                IRepository<CustomAppointment> CustomAppointment,
+                IRequestRepository requestReopsitory
             ) 
         {
             _RequestRepository = RequestRepository;
@@ -36,6 +38,7 @@ namespace OnlineCours.Controllers
             _RequestAppointmentRepository = RequestAppointmentRepository;
             _SubjectRepository = SubjectRepository;
             _customAppointment = CustomAppointment;
+            _requestReopsitory = requestReopsitory;
         }
 
         [HttpPost("StudentRequestToTakeSubject")]
@@ -103,6 +106,21 @@ namespace OnlineCours.Controllers
         {
             List<Subject> Subjects = await _SubjectRepository.GetSubjectsByStudent(StudentId);
             return Ok(Subjects);
+        }
+
+
+        [HttpGet("GetAllAcceptedRequest")]
+        public async Task<ActionResult<List<RequestAppointmentDTO>>> GetAllAcceptedRequest()
+        {
+            var instructors = await _requestReopsitory.GetAllAcceptedRequest();
+            return Ok(instructors);
+        }
+
+        [HttpGet("GetAllPendingRequest")]
+        public async Task<ActionResult<List<RequestAppointmentDTO>>> GetAllPendingRequest()
+        {
+            var instructors = await _requestReopsitory.GetAllPenddingRequest();
+            return Ok(instructors);
         }
     }
 }
