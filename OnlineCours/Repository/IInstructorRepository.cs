@@ -9,13 +9,11 @@ namespace OnlineCours.Repository
     {
         public Task<List<StudentRequestForInstructor>> GetAllRequestToByInstructorId(string InstructorId);
 
-
         // CRUD Bridge
         Task<List<InstructorDTO>> GetAllAsync();
         Task<List<InstructorDTO>> GetByDay(int DayOfWeek);
         Task<List<InstructorDTO>> GetBySubject(int SubjectId);
         Task<InstructorDTO> GetById(string Id);
-
 
 
         Task<List<InstructorDTO>> Get(Expression<Func<Instructor, bool>> expression);

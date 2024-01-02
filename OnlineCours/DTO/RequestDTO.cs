@@ -21,6 +21,7 @@ namespace OnlineCours.DTO
 
     public class StudentRequestForInstructor
     {
+        public int CustomAppointmentId { get; set; }
         public int RequestId { get; set; }
         public string StudentName { get; set; }
         public string Grade { get; set; }
