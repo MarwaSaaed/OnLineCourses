@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using OCTW.Server.Repository;
 using OnlineCours.DTO;
 using OnlineCours.Models;
 using OnlineCours.Repository;
@@ -12,10 +13,12 @@ namespace OnlineCours.Controllers
     public class InstructorController : ControllerBase
     {
         private readonly IInstructorRepository _instructorRepository;
+        private readonly IRepository<CustomAppointment> _CustomAppointmentRepository;
 
-        public InstructorController(IInstructorRepository instructorRepository)
+        public InstructorController(IInstructorRepository instructorRepository, IRepository<CustomAppointment> CustomAppointmentRepository)
         {
             _instructorRepository = instructorRepository;
+            _CustomAppointmentRepository = CustomAppointmentRepository;
         }
 
         [HttpGet("GetAllInstructors")]
@@ -46,7 +49,7 @@ namespace OnlineCours.Controllers
             {
                 return NotFound();
             }
-            
+
 
             return Ok(instructor);
         }
@@ -102,7 +105,7 @@ namespace OnlineCours.Controllers
 
             return Ok(Result);
         }
-        
+
         [HttpPost("AddInstructorSubject")]
         public async Task<ActionResult> AddInstructorSubject(InstructorSubjectDTO instructorSubjectDTO)
         {
@@ -118,19 +121,23 @@ namespace OnlineCours.Controllers
 
             return Ok(Result);
         }
-        //[HttpPut("AcceptInstructor/{Id}")]
-        //public async Task<IActionResult> GetInstructorBySubject(string Id)
-        //{
-        //    var instrucor =await _instructorRepository.GetById(Id);
-        //    if(instrucor!=null)
-        //    {
-        //         instrucor.status = StatusOfInstructor.Accepted;
-        //        I
-        //         await _instructorRepository.UpdateAsync(instrucor);
 
-        //    }
-        //    return Ok(Result);
-        //}
+        [HttpPut("EditAppointment/{id}")]
+        public async Task<IActionResult> EditAppointmentForUser(int id, EditAppointmentModel EditAppointmentModel)
+        {
+            var appointmetn = await _CustomAppointmentRepository.GetById(id);
+            if (appointmetn != null)
+            {
+                appointmetn.LectureDate = EditAppointmentModel.LectureDate;
+                Enum.TryParse(typeof(Day), EditAppointmentModel.DayOfWeek, out object dayEnumValue);
+                    Day day = (Day)dayEnumValue;
+                    appointmetn.DayOfWeek = day;
+                    await _CustomAppointmentRepository.UpdateAsync(appointmetn);
+                    return Ok(appointmetn);
+
+            }
+                return Conflict("The appointment not found");
+        }
+
     }
-
 }

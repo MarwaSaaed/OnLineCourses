@@ -308,6 +308,7 @@ namespace OnlineCours.Repository
                 .ThenInclude(s => s.Student);
             var FinalResult = await Result.Select(r => new StudentRequestForInstructor
             {
+                CustomAppointmentId = r.CustomAppointmentID,
                 DayOfWeek = r.CustomAppointment.DayOfWeek.ToString(),
                 Grade = r.Request.Grade,
                 LectureDate = r.CustomAppointment.LectureDate,
