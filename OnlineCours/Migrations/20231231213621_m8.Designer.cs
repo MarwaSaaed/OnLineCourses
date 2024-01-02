@@ -12,8 +12,8 @@ using OnlineCours.Models;
 namespace OnlineCours.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20231221105445_Ins")]
-    partial class Ins
+    [Migration("20231231213621_m8")]
+    partial class m8
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -247,8 +247,9 @@ namespace OnlineCours.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("LectureDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("LectureDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Status")
                         .HasColumnType("int");
@@ -258,6 +259,75 @@ namespace OnlineCours.Migrations
                     b.HasIndex("InstructorSubjectBridgeID");
 
                     b.ToTable("Appointments");
+                });
+
+            modelBuilder.Entity("OnlineCours.Models.CourseRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("File")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CoursesRequest");
+                });
+
+            modelBuilder.Entity("OnlineCours.Models.CustomAppointment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DayOfWeek")
+                        .HasColumnType("int");
+
+                    b.Property<int>("InstructorSubjectBridgeID")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LectureDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InstructorSubjectBridgeID");
+
+                    b.ToTable("CustomAppointments");
                 });
 
             modelBuilder.Entity("OnlineCours.Models.Instructor", b =>
@@ -300,6 +370,30 @@ namespace OnlineCours.Migrations
                     b.ToTable("InstructorSubjects");
                 });
 
+            modelBuilder.Entity("OnlineCours.Models.OtherRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ConsultingHoures")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CourseRequestId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseRequestId");
+
+                    b.ToTable("ConsultingRequest");
+                });
+
             modelBuilder.Entity("OnlineCours.Models.Request", b =>
                 {
                     b.Property<int>("Id")
@@ -340,7 +434,7 @@ namespace OnlineCours.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AppointmentID")
+                    b.Property<int>("CustomAppointmentID")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
@@ -351,7 +445,7 @@ namespace OnlineCours.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppointmentID");
+                    b.HasIndex("CustomAppointmentID");
 
                     b.HasIndex("RequestID");
 
@@ -456,6 +550,17 @@ namespace OnlineCours.Migrations
                     b.Navigation("InstructorSubjectBridge");
                 });
 
+            modelBuilder.Entity("OnlineCours.Models.CustomAppointment", b =>
+                {
+                    b.HasOne("OnlineCours.Models.InstructorSubjectBridge", "InstructorSubjectBridge")
+                        .WithMany()
+                        .HasForeignKey("InstructorSubjectBridgeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("InstructorSubjectBridge");
+                });
+
             modelBuilder.Entity("OnlineCours.Models.Instructor", b =>
                 {
                     b.HasOne("OnlineCours.Models.ApplicationUser", "applicationUser")
@@ -486,6 +591,17 @@ namespace OnlineCours.Migrations
                     b.Navigation("Subject");
                 });
 
+            modelBuilder.Entity("OnlineCours.Models.OtherRequest", b =>
+                {
+                    b.HasOne("OnlineCours.Models.CourseRequest", "courseRequest")
+                        .WithMany()
+                        .HasForeignKey("CourseRequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("courseRequest");
+                });
+
             modelBuilder.Entity("OnlineCours.Models.Request", b =>
                 {
                     b.HasOne("OnlineCours.Models.Student", "Student")
@@ -499,9 +615,9 @@ namespace OnlineCours.Migrations
 
             modelBuilder.Entity("OnlineCours.Models.RequestAppointment", b =>
                 {
-                    b.HasOne("OnlineCours.Models.Appointment", "Appointment")
+                    b.HasOne("OnlineCours.Models.CustomAppointment", "CustomAppointment")
                         .WithMany()
-                        .HasForeignKey("AppointmentID")
+                        .HasForeignKey("CustomAppointmentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -511,7 +627,7 @@ namespace OnlineCours.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Appointment");
+                    b.Navigation("CustomAppointment");
 
                     b.Navigation("Request");
                 });

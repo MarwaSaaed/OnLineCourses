@@ -61,6 +61,8 @@ namespace OnlineCours
             builder.Services.AddScoped<IPersonRepository<Instructor>, PersonRepository<Instructor>>();
             builder.Services.AddScoped<IPersonRepository<Student>, PersonRepository<Student>>();
             builder.Services.AddScoped<IRepository<CustomAppointment>, Repository<CustomAppointment>>();
+            builder.Services.AddScoped<IOtherRequestRepositry, OtherRequestRepositry>();
+            builder.Services.AddScoped<ICourseRequesRepositry, CourseRequesRepositry>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -75,6 +77,7 @@ namespace OnlineCours
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseStaticFiles();
 
             app.UseAuthorization();
             app.UseHttpsRedirection();

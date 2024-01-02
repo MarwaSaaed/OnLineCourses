@@ -1,0 +1,33 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\BackendCourse\\Back\\OnlineCours\\wwwroot\\uploads\\4c22851f-5405-41eb-9224-595abf163ab7.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\4c22851f-5405-41eb-9224-595abf163ab7.jpeg"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\BackendCourse\\Back\\OnlineCours\\wwwroot\\uploads\\7459e362-eec8-43cf-96f7-744f159563f4.jpg",
+      "PackagePath": "staticwebassets\\uploads\\7459e362-eec8-43cf-96f7-744f159563f4.jpg"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\BackendCourse\\Back\\OnlineCours\\wwwroot\\uploads\\df6e0135-9b89-464e-93c9-21a2892d51b1.pdf",
+      "PackagePath": "staticwebassets\\uploads\\df6e0135-9b89-464e-93c9-21a2892d51b1.pdf"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.OnlineCours.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.OnlineCours.props",
+      "PackagePath": "build\\OnlineCours.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.OnlineCours.props",
+      "PackagePath": "buildMultiTargeting\\OnlineCours.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.OnlineCours.props",
+      "PackagePath": "buildTransitive\\OnlineCours.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
