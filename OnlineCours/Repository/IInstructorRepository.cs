@@ -15,10 +15,13 @@ namespace OnlineCours.Repository
         Task<List<InstructorDTO>> GetBySubject(int SubjectId);
         Task<InstructorDTO> GetById(string Id);
 
+        Task<List<InstructorDTO>> GetAllAcceptedInstructors();
 
         Task<List<InstructorDTO>> Get(Expression<Func<Instructor, bool>> expression);
         Task<string> Delete(string id);
         Task<string> AddInstructorSubject(InstructorSubjectDTO instructorSubjectDTO);
         bool Exists(string id);
+       Task<List<InstructorDTO>> GetAllPendingInstructoresAsync();
+
     }
 }

@@ -22,5 +22,6 @@ namespace OnlineCours.Repository
                 .ThenInclude(r => r.Subject).ToListAsync();
             return RequestAppointment;
         }
+
     }
 }

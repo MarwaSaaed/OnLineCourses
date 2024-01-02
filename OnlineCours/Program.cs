@@ -58,8 +58,8 @@ namespace OnlineCours
             builder.Services.AddScoped<IAppointmentRepositroy, AppointmentRepository>();
             builder.Services.AddScoped<IInstructorRepository, InstructorRepository>();
             builder.Services.AddScoped<IInstructorSubjectBridgeRepository, InstructorSubjectBridgeReposirtory>();
-
             builder.Services.AddScoped<IPersonRepository<Instructor>, PersonRepository<Instructor>>();
+            builder.Services.AddScoped<IPersonRepository<Student>, PersonRepository<Student>>();
             builder.Services.AddScoped<IRepository<CustomAppointment>, Repository<CustomAppointment>>();
 
             builder.Services.AddControllers();

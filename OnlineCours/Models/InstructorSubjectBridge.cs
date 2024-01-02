@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace OnlineCours.Models
 {
@@ -12,7 +13,6 @@ namespace OnlineCours.Models
         [ForeignKey("Instructor")]
         public string InstructorID { get; set; }
         public virtual Instructor? Instructor { get; set; }
-
         public List<Appointment> Appointments { get; set; }
     }
 }

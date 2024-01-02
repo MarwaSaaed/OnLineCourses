@@ -23,11 +23,23 @@ namespace OnlineCours.Controllers
 
         [HttpGet("GetAllInstructors")]
         public async Task<ActionResult<List<InstructorDTO>>> GetAllInstructors()
-        {
+        { 
             var instructors = await _instructorRepository.GetAllAsync();
             return Ok(instructors);
         }
+        [HttpGet("GetAllAcceptedInstructors")]
+        public async Task<ActionResult<List<InstructorDTO>>> GetAllAcceptedInstructors()
+        {
+            var instructors = await _instructorRepository.GetAllAcceptedInstructors();
+            return Ok(instructors);
+        }
 
+        [HttpGet("GetAllPendingInstructors")]
+        public async Task<ActionResult<List<InstructorDTO>>> GetAllPendingInstructors()
+        {
+            var instructors = await _instructorRepository.GetAllPendingInstructoresAsync();
+            return Ok(instructors);
+        }
 
         [HttpGet("GetInstructorById/{id}")]
         public async Task<ActionResult<InstructorDTO>> GetInstructorById(string id)
