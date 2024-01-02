@@ -1,11 +1,71 @@
 {
   "Version": 1,
-  "Hash": "dVQ0G40RK+4FK6E+NsNYS2unVTvwzxyslN0kCCtw7e0=",
+  "Hash": "e+knYsR/eyankfalLVZd9ijsMdnAOII/zEpXHsZcWIA=",
   "Source": "OnlineCours",
   "BasePath": "_content/OnlineCours",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "OnlineCours\\wwwroot",
+      "Source": "OnlineCours",
+      "ContentRoot": "D:\\ITI_9\\Work\\OnlineCours\\BackendCourse\\Back\\OnlineCours\\wwwroot\\",
+      "BasePath": "_content/OnlineCours",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\ITI_9\\Work\\OnlineCours\\BackendCourse\\Back\\OnlineCours\\wwwroot\\uploads\\4c22851f-5405-41eb-9224-595abf163ab7.jpeg",
+      "SourceId": "OnlineCours",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ITI_9\\Work\\OnlineCours\\BackendCourse\\Back\\OnlineCours\\wwwroot\\",
+      "BasePath": "_content/OnlineCours",
+      "RelativePath": "uploads/4c22851f-5405-41eb-9224-595abf163ab7.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\4c22851f-5405-41eb-9224-595abf163ab7.jpeg"
+    },
+    {
+      "Identity": "D:\\ITI_9\\Work\\OnlineCours\\BackendCourse\\Back\\OnlineCours\\wwwroot\\uploads\\7459e362-eec8-43cf-96f7-744f159563f4.jpg",
+      "SourceId": "OnlineCours",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ITI_9\\Work\\OnlineCours\\BackendCourse\\Back\\OnlineCours\\wwwroot\\",
+      "BasePath": "_content/OnlineCours",
+      "RelativePath": "uploads/7459e362-eec8-43cf-96f7-744f159563f4.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\7459e362-eec8-43cf-96f7-744f159563f4.jpg"
+    },
+    {
+      "Identity": "D:\\ITI_9\\Work\\OnlineCours\\BackendCourse\\Back\\OnlineCours\\wwwroot\\uploads\\df6e0135-9b89-464e-93c9-21a2892d51b1.pdf",
+      "SourceId": "OnlineCours",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ITI_9\\Work\\OnlineCours\\BackendCourse\\Back\\OnlineCours\\wwwroot\\",
+      "BasePath": "_content/OnlineCours",
+      "RelativePath": "uploads/df6e0135-9b89-464e-93c9-21a2892d51b1.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\df6e0135-9b89-464e-93c9-21a2892d51b1.pdf"
+    }
+  ]
 }
