@@ -18,7 +18,12 @@ namespace OnlineCours.Controllers
         public readonly IInstructorSubjectBridgeRepository _InstructorSubjectBridgeRepository;
         public readonly IRequestAppointmentRepository _RequestAppointmentRepository;
         public readonly ISubjectRepository _SubjectRepository;
+        public readonly IstudentRepository _studentrepository;
+
+
         public readonly IRepository<CustomAppointment> _customAppointment;
+
+
 
         public StudentController
             (
@@ -27,7 +32,8 @@ namespace OnlineCours.Controllers
                 IInstructorSubjectBridgeRepository InstructorSubjectBridgeRepository,
                 IRequestAppointmentRepository RequestAppointmentRepository,
                 ISubjectRepository SubjectRepository,
-                IRepository<CustomAppointment> CustomAppointment
+                IRepository<CustomAppointment> CustomAppointment,
+                IstudentRepository studentrepository
             ) 
         {
             _RequestRepository = RequestRepository;
@@ -36,6 +42,7 @@ namespace OnlineCours.Controllers
             _RequestAppointmentRepository = RequestAppointmentRepository;
             _SubjectRepository = SubjectRepository;
             _customAppointment = CustomAppointment;
+            _studentrepository= studentrepository;
         }
 
         [HttpPost("StudentRequestToTakeSubject")]
@@ -95,14 +102,33 @@ namespace OnlineCours.Controllers
             }
             return Ok(new Result { Message = "Created" });
         }
-
-
-
         [HttpGet("GetStudentSubject")]
         public  async Task <IActionResult> GetStudentSubject(string StudentId)
         {
             List<Subject> Subjects = await _SubjectRepository.GetSubjectsByStudent(StudentId);
             return Ok(Subjects);
         }
+
+
+        [HttpGet("{studentId}")]
+        public async Task<IActionResult> GetStudentDto(string studentId)
+        {
+            var studentDto = await _studentrepository.GetStudentsubject(studentId, "ApplicationUser");
+
+            if (studentDto == null)
+            {
+                
+                return NotFound();
+            }
+
+            return Ok(studentDto);
+        }
     }
-}
+
+
+
+    }
+
+
+   
+

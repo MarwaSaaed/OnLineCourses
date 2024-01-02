@@ -222,7 +222,7 @@ namespace OnlineCours.Repository
             var instructors = _context.Instructors
             .Where(instructor => instructor.InstructorSubjectBridge != null &&
                                  instructor.InstructorSubjectBridge.Any(bridge =>
-                                    bridge.Appointments.Any(appointment => appointment.DayOfWeek == (Day)DayOfWeek)))
+                                bridge.Appointments.Any(appointment => appointment.DayOfWeek == (Day)DayOfWeek)))
             .ToList();
 
 
@@ -366,15 +366,10 @@ namespace OnlineCours.Repository
             List<Instructor> instructors =await _context.Instructors
             .Include(x => x.applicationUser)
              .Where(x=>x.status==StatusOfInstructor.Pendding).ToListAsync();
-
-
             List<InstructorDTO> insDTO = new List<InstructorDTO>();
-
             foreach (var instructor in instructors)
             {
                 
-            
-       
                 insDTO.Add(new InstructorDTO
                 {
                     Id = instructor.applicationUserID,
