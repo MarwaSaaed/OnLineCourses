@@ -19,8 +19,6 @@ namespace OnlineCours.Controllers
         public readonly IRequestAppointmentRepository _RequestAppointmentRepository;
         public readonly ISubjectRepository _SubjectRepository;
         public readonly IstudentRepository _studentrepository;
-
-
         public readonly IRepository<CustomAppointment> _customAppointment;
 
 
@@ -111,7 +109,7 @@ namespace OnlineCours.Controllers
 
 
         [HttpGet("{studentId}")]
-        public async Task<IActionResult> GetStudentDto(string studentId)
+        public async Task<IActionResult> GetStudentswithIdandsubject(string studentId)
         {
             var studentDto = await _studentrepository.GetStudentsubject(studentId, "ApplicationUser");
 
@@ -123,11 +121,29 @@ namespace OnlineCours.Controllers
 
             return Ok(studentDto);
         }
+
+
+        [HttpPut("UpdateStudent/{id}")]
+        public async Task<IActionResult> UpdateStudent(string id, StudentDTO student)
+        {
+            var OldStudent = await _studentrepository.GetByFilterAsync(s => s.ApplicationUserID == id, "ApplicationUser");
+
+            if (OldStudent == null)
+            {
+                return NotFound();
+            }
+            OldStudent.ApplicationUser.Name = student.Name;
+            OldStudent.ApplicationUser.PhoneNumber = student.Phone;
+            OldStudent.ApplicationUser.Email = student.Email;
+            await _studentrepository.UpdateAsync(OldStudent);
+            return Ok("updated");
+        }
+
+
     }
 
 
-
-    }
+}
 
 
    

@@ -52,32 +52,32 @@ namespace OnlineCours.Controllers
         }
 
 
-        [HttpPut("UpdateInstructor/{id}")]
-        public async Task<IActionResult> UpdateInstructor(string id, Instructor instructor)
-        {
-            if (id != instructor.applicationUserID)
-            {
-                return BadRequest();
-            }
+        //[HttpPut("UpdateInstructor/{id}")]
+        //public async Task<IActionResult> UpdateInstructor(string id, Instructor instructor)
+        //{
+        //    if (id != instructor.applicationUserID)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            try
-            {
-                await _instructorRepository.UpdateAsync(instructor);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_instructorRepository.Exists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await _instructorRepository.UpdateAsync(instructor);
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!_instructorRepository.Exists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
 
         [HttpDelete("DeleteInstructor/{id}")]
@@ -118,6 +118,46 @@ namespace OnlineCours.Controllers
 
             return Ok(Result);
         }
+
+        [HttpPut("UpdateInstructorProfile/{id}")]
+        public async Task<IActionResult> UpdateInstructor(string id, UpdateInstructorDTO instructor)
+        {
+            var oldInstructor = await _instructorRepository.GetByFilterAsync(s => s.applicationUserID == id, "applicationUser");
+
+            if (oldInstructor == null)
+            {
+                return NotFound();
+            }
+            oldInstructor.applicationUser.Name = instructor.Name;
+            oldInstructor.applicationUser.PhoneNumber = instructor.phone;
+            oldInstructor.applicationUser.Email = instructor.Email;
+            await _instructorRepository.UpdateAsync(oldInstructor);
+            return Ok("updated");
+        }
+
+        //[HttpGet("GetInstructorById/{id}")]
+        //public async Task<ActionResult<InstructorDTO>> GetInstructorById(string id)
+        //{
+        //    var instructor = await _instructorRepository.GetByFilterAsync(r => r.applicationUserID == id, "applicationUser");
+        //    if (instructor == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    InstructorDTO instructorDTO = new InstructorDTO
+        //    {
+        //        Id = instructor.applicationUserID,
+        //        Name = instructor.applicationUser.Name,
+        //        Email = instructor.applicationUser.Email,
+        //        Phone = instructor.applicationUser.PhoneNumber,
+        //        status = instructor.status,
+               
+
+        //    };
+
+        //    return Ok(instructorDTO);
+        //}
+
         //[HttpPut("AcceptInstructor/{Id}")]
         //public async Task<IActionResult> GetInstructorBySubject(string Id)
         //{
@@ -131,6 +171,20 @@ namespace OnlineCours.Controllers
         //    }
         //    return Ok(Result);
         //}
+
+
+        [HttpGet("GetInstructorWithSubject/{id}")]
+        public async Task<ActionResult<InstructorDTO>> GetInstructorWithsubject(string id)
+        {
+
+            var instructorwithsubject = await _instructorRepository.GetInstructorWithSubject(id);
+            if (instructorwithsubject == null)
+            {
+                return NotFound();
+            }
+            return instructorwithsubject;
+
+        }
     }
 
 }

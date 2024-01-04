@@ -412,6 +412,36 @@ namespace OnlineCours.Repository
             return insDTO;
         }
 
+        public async Task<InstructorDTO> GetInstructorWithSubject(string id)
+        {
+
+            var instructorWithSubjects = await _context.InstructorSubjects
+                .Include(i => i.Instructor)
+                .ThenInclude(s => s.applicationUser)
+                .Include(s => s.Subject)
+                .Where(s => s.InstructorID == id)
+                .ToListAsync();
+
+
+            if (instructorWithSubjects == null || instructorWithSubjects.Count == 0)
+            {
+                return null;
+            }
+
+
+            var instructorDTO = new InstructorDTO
+            {
+                Id = instructorWithSubjects.FirstOrDefault().InstructorID,
+                Name = instructorWithSubjects.FirstOrDefault().Instructor.applicationUser?.Name,
+                Email = instructorWithSubjects.FirstOrDefault().Instructor.applicationUser?.Email,
+                Phone = instructorWithSubjects.FirstOrDefault().Instructor.applicationUser?.PhoneNumber,
+                status = instructorWithSubjects.FirstOrDefault().Instructor.status,
+                Subjects = instructorWithSubjects.Select(s => s.Subject?.Name).ToList()
+            };
+
+            return instructorDTO;
+        }
+
 
     }
 }
