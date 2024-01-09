@@ -20,7 +20,6 @@ namespace OnlineCours.Controllers
         public readonly ISubjectRepository _SubjectRepository;
         public readonly IRequestRepository _requestReopsitory;
         public readonly IRepository<CustomAppointment> _customAppointment;
-        public readonly IstudentRepository _studentrepository;
 
         public StudentController
             (
@@ -30,8 +29,7 @@ namespace OnlineCours.Controllers
                 IRequestAppointmentRepository RequestAppointmentRepository,
                 ISubjectRepository SubjectRepository,
                 IRepository<CustomAppointment> CustomAppointment,
-                IRequestRepository requestReopsitory,
-              IstudentRepository studentrepository
+                IRequestRepository requestReopsitory
             ) 
         {
             _RequestRepository = RequestRepository;
@@ -41,7 +39,6 @@ namespace OnlineCours.Controllers
             _SubjectRepository = SubjectRepository;
             _customAppointment = CustomAppointment;
             _requestReopsitory = requestReopsitory;
-            _studentrepository= studentrepository;
         }
 
         [HttpPost("StudentRequestToTakeSubject")]
@@ -104,6 +101,13 @@ namespace OnlineCours.Controllers
 
 
 
+        [HttpGet("GetStudentSubject")]
+        public  async Task <IActionResult> GetStudentSubject(string StudentId)
+        {
+            List<Subject> Subjects = await _SubjectRepository.GetSubjectsByStudent(StudentId);
+            return Ok(Subjects);
+        }
+
 
         [HttpGet("GetAllAcceptedRequest")]
         public async Task<ActionResult<List<RequestAppointmentDTO>>> GetAllAcceptedRequest()
@@ -118,52 +122,5 @@ namespace OnlineCours.Controllers
             var instructors = await _requestReopsitory.GetAllPenddingRequest();
             return Ok(instructors);
         }
-        [HttpGet("{studentId}")]
-        public async Task<IActionResult> GetStudentswithIdandsubject(string studentId)
-        {
-            var studentDto = await _studentrepository.GetStudentsubject(studentId, "ApplicationUser");
-
-            if (studentDto == null)
-            {
-
-                return NotFound();
-            }
-
-            return Ok(studentDto);
-        }
-
-
-        [HttpPut("UpdateStudent/{id}")]
-        public async Task<IActionResult> UpdateStudent(string id, StudentDTO student)
-        {
-            var OldStudent = await _studentrepository.GetByFilterAsync(s => s.ApplicationUserID == id, "ApplicationUser");
-
-            if (OldStudent == null)
-            {
-                return NotFound();
-            }
-            OldStudent.ApplicationUser.Name = student.Name;
-            OldStudent.ApplicationUser.PhoneNumber = student.Phone;
-            OldStudent.ApplicationUser.Email = student.Email;
-            await _studentrepository.UpdateAsync(OldStudent);
-            return Ok("updated");
-        }
-
-            [HttpGet("subjects/{studentId}")]
-            public async Task<ActionResult<List<StudentLibraryDTO>>> GetSubjectsByStudent(string studentId)
-            {
-                try
-                {
-                    var result = await _SubjectRepository.GetSubjectsByStudent(studentId);
-                    return Ok(result);
-                }
-                catch (Exception ex)
-                {
-                
-                    return StatusCode(500, "Internal server error");
-                }
-            }
-        }
- }
-
-
+    }
+}
