@@ -5,6 +5,7 @@ using OCTW.Server.Repository;
 using OnlineCours.DTO;
 using OnlineCours.Models;
 using OnlineCours.Repository;
+using System.Reflection.Metadata.Ecma335;
 
 namespace OnlineCours.Controllers
 {
@@ -14,16 +15,25 @@ namespace OnlineCours.Controllers
     {
         private readonly IInstructorRepository _instructorRepository;
         private readonly IRepository<CustomAppointment> _CustomAppointmentRepository;
+        private readonly IRepository<Tutorial> _TutorialRepository;
+        private readonly IRepository<SubjectTutorial> _SubjectTutorialRepository;
+        private readonly IInstructorSubjectBridgeRepository _InstructorSubjectBridgeRepository;
 
-        public InstructorController(IInstructorRepository instructorRepository, IRepository<CustomAppointment> CustomAppointmentRepository)
+
+        public InstructorController(IRepository<SubjectTutorial> SubjectTutorialRepository,IInstructorSubjectBridgeRepository InstructorSubjectBridgeRepository, IRepository<Tutorial> tutorialRepository, IInstructorRepository instructorRepository, IRepository<CustomAppointment> CustomAppointmentRepository)
         {
             _instructorRepository = instructorRepository;
             _CustomAppointmentRepository = CustomAppointmentRepository;
+            _TutorialRepository = tutorialRepository;
+            _InstructorSubjectBridgeRepository = InstructorSubjectBridgeRepository;
+            _SubjectTutorialRepository = SubjectTutorialRepository;
+
+
         }
 
         [HttpGet("GetAllInstructors")]
         public async Task<ActionResult<List<InstructorDTO>>> GetAllInstructors()
-        { 
+        {
             var instructors = await _instructorRepository.GetAllAsync();
             return Ok(instructors);
         }
@@ -130,14 +140,48 @@ namespace OnlineCours.Controllers
             {
                 appointmetn.LectureDate = EditAppointmentModel.LectureDate;
                 Enum.TryParse(typeof(Day), EditAppointmentModel.DayOfWeek, out object dayEnumValue);
-                    Day day = (Day)dayEnumValue;
-                    appointmetn.DayOfWeek = day;
-                    await _CustomAppointmentRepository.UpdateAsync(appointmetn);
-                    return Ok(appointmetn);
+                Day day = (Day)dayEnumValue;
+                appointmetn.DayOfWeek = day;
+                await _CustomAppointmentRepository.UpdateAsync(appointmetn);
+                return Ok(appointmetn);
 
             }
-                return Conflict("The appointment not found");
+            return Conflict("The appointment not found");
         }
 
+        [HttpPost("UploadTutorial")]
+        public async Task<IActionResult> UploadTutorialOfSubjcet(UploadTutorialModel uploadTutorialModel)
+        {
+            var InsSubject = _InstructorSubjectBridgeRepository.GetAllByFilter(x => x.InstructorID == uploadTutorialModel.InstructorId && x.SubjectID == uploadTutorialModel.SubjcetId)
+                .FirstOrDefault();
+            if (InsSubject != null)
+            {
+
+                Tutorial Tutorial = new Tutorial
+                {
+                    InstructorSubjectId = InsSubject.Id,
+                    Name = uploadTutorialModel.TutorialName,
+                    StudentId = uploadTutorialModel.StudentId,
+                };
+                await _TutorialRepository.CreateAsync(Tutorial);
+
+                foreach(var item in uploadTutorialModel.Tutorial)
+                {
+                    SubjectTutorial subjectTutorial = new SubjectTutorial
+                    {
+                        subjectTutorial = item.subjectTutorial,
+                        TutorialType = item.TutorialType,
+                        TutorialId = Tutorial.Id,
+                    };
+                    await _SubjectTutorialRepository.CreateAsync(subjectTutorial);
+                }
+                return Ok(Tutorial);
+            }
+            else
+            {
+                return Conflict();
+            }
+
+        }
     }
 }
