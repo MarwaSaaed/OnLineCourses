@@ -1,16 +1,72 @@
 {
   "Files": [
     {
-      "Id": "D:\\ITI_9\\Work\\OnlineCours\\BackendCourse\\Back\\OnlineCours\\wwwroot\\uploads\\4c22851f-5405-41eb-9224-595abf163ab7.jpeg",
+      "Id": "C:\\Users\\Electronica Care\\Desktop\\New folder\\OnLineCourses\\OnlineCours\\wwwroot\\uploads\\032f53f4-b6e1-4dbb-8b93-8ef7f5fb7b70.docx",
+      "PackagePath": "staticwebassets\\uploads\\032f53f4-b6e1-4dbb-8b93-8ef7f5fb7b70.docx"
+    },
+    {
+      "Id": "C:\\Users\\Electronica Care\\Desktop\\New folder\\OnLineCourses\\OnlineCours\\wwwroot\\uploads\\05fe6462-7a32-4ec9-925a-76437c0ab5b1.docx",
+      "PackagePath": "staticwebassets\\uploads\\05fe6462-7a32-4ec9-925a-76437c0ab5b1.docx"
+    },
+    {
+      "Id": "C:\\Users\\Electronica Care\\Desktop\\New folder\\OnLineCourses\\OnlineCours\\wwwroot\\uploads\\1e986f6f-ceab-45ad-a24c-5b73fe089e57.sql",
+      "PackagePath": "staticwebassets\\uploads\\1e986f6f-ceab-45ad-a24c-5b73fe089e57.sql"
+    },
+    {
+      "Id": "C:\\Users\\Electronica Care\\Desktop\\New folder\\OnLineCourses\\OnlineCours\\wwwroot\\uploads\\4c22851f-5405-41eb-9224-595abf163ab7.jpeg",
       "PackagePath": "staticwebassets\\uploads\\4c22851f-5405-41eb-9224-595abf163ab7.jpeg"
     },
     {
-      "Id": "D:\\ITI_9\\Work\\OnlineCours\\BackendCourse\\Back\\OnlineCours\\wwwroot\\uploads\\7459e362-eec8-43cf-96f7-744f159563f4.jpg",
+      "Id": "C:\\Users\\Electronica Care\\Desktop\\New folder\\OnLineCourses\\OnlineCours\\wwwroot\\uploads\\5116a5f4-badb-4c6c-a033-41de346736ac.docx",
+      "PackagePath": "staticwebassets\\uploads\\5116a5f4-badb-4c6c-a033-41de346736ac.docx"
+    },
+    {
+      "Id": "C:\\Users\\Electronica Care\\Desktop\\New folder\\OnLineCourses\\OnlineCours\\wwwroot\\uploads\\660769d0-3fdf-4379-9cfe-a8cc5e6f2c07.docx",
+      "PackagePath": "staticwebassets\\uploads\\660769d0-3fdf-4379-9cfe-a8cc5e6f2c07.docx"
+    },
+    {
+      "Id": "C:\\Users\\Electronica Care\\Desktop\\New folder\\OnLineCourses\\OnlineCours\\wwwroot\\uploads\\7423a7ff-ebc7-4321-9bb6-c7ed636f30f9.docx",
+      "PackagePath": "staticwebassets\\uploads\\7423a7ff-ebc7-4321-9bb6-c7ed636f30f9.docx"
+    },
+    {
+      "Id": "C:\\Users\\Electronica Care\\Desktop\\New folder\\OnLineCourses\\OnlineCours\\wwwroot\\uploads\\7459e362-eec8-43cf-96f7-744f159563f4.jpg",
       "PackagePath": "staticwebassets\\uploads\\7459e362-eec8-43cf-96f7-744f159563f4.jpg"
     },
     {
-      "Id": "D:\\ITI_9\\Work\\OnlineCours\\BackendCourse\\Back\\OnlineCours\\wwwroot\\uploads\\df6e0135-9b89-464e-93c9-21a2892d51b1.pdf",
+      "Id": "C:\\Users\\Electronica Care\\Desktop\\New folder\\OnLineCourses\\OnlineCours\\wwwroot\\uploads\\76077a1a-7b48-432d-aea0-81666893d2b9.docx",
+      "PackagePath": "staticwebassets\\uploads\\76077a1a-7b48-432d-aea0-81666893d2b9.docx"
+    },
+    {
+      "Id": "C:\\Users\\Electronica Care\\Desktop\\New folder\\OnLineCourses\\OnlineCours\\wwwroot\\uploads\\819ab071-c33d-4102-96cb-6758c4ed9442.docx",
+      "PackagePath": "staticwebassets\\uploads\\819ab071-c33d-4102-96cb-6758c4ed9442.docx"
+    },
+    {
+      "Id": "C:\\Users\\Electronica Care\\Desktop\\New folder\\OnLineCourses\\OnlineCours\\wwwroot\\uploads\\a565a731-2cf6-4bef-90f4-5eb32702e486.pdf",
+      "PackagePath": "staticwebassets\\uploads\\a565a731-2cf6-4bef-90f4-5eb32702e486.pdf"
+    },
+    {
+      "Id": "C:\\Users\\Electronica Care\\Desktop\\New folder\\OnLineCourses\\OnlineCours\\wwwroot\\uploads\\c7dd9727-67bc-4f1d-be83-f68d271e04e5.docx",
+      "PackagePath": "staticwebassets\\uploads\\c7dd9727-67bc-4f1d-be83-f68d271e04e5.docx"
+    },
+    {
+      "Id": "C:\\Users\\Electronica Care\\Desktop\\New folder\\OnLineCourses\\OnlineCours\\wwwroot\\uploads\\dc513637-da49-4fa3-bbf6-6e5cf0281df8.docx",
+      "PackagePath": "staticwebassets\\uploads\\dc513637-da49-4fa3-bbf6-6e5cf0281df8.docx"
+    },
+    {
+      "Id": "C:\\Users\\Electronica Care\\Desktop\\New folder\\OnLineCourses\\OnlineCours\\wwwroot\\uploads\\dcee5298-a755-464f-8df8-aa00881505f9.docx",
+      "PackagePath": "staticwebassets\\uploads\\dcee5298-a755-464f-8df8-aa00881505f9.docx"
+    },
+    {
+      "Id": "C:\\Users\\Electronica Care\\Desktop\\New folder\\OnLineCourses\\OnlineCours\\wwwroot\\uploads\\df6e0135-9b89-464e-93c9-21a2892d51b1.pdf",
       "PackagePath": "staticwebassets\\uploads\\df6e0135-9b89-464e-93c9-21a2892d51b1.pdf"
+    },
+    {
+      "Id": "C:\\Users\\Electronica Care\\Desktop\\New folder\\OnLineCourses\\OnlineCours\\wwwroot\\uploads\\e771e0fa-e875-4745-8dfe-b878926d4ced.sql",
+      "PackagePath": "staticwebassets\\uploads\\e771e0fa-e875-4745-8dfe-b878926d4ced.sql"
+    },
+    {
+      "Id": "C:\\Users\\Electronica Care\\Desktop\\New folder\\OnLineCourses\\OnlineCours\\wwwroot\\uploads\\f1e163a7-7311-4955-83b6-3131c8f6449c.docx",
+      "PackagePath": "staticwebassets\\uploads\\f1e163a7-7311-4955-83b6-3131c8f6449c.docx"
     },
     {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.OnlineCours.Microsoft.AspNetCore.StaticWebAssets.props",
