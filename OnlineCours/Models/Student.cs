@@ -11,6 +11,6 @@ namespace OnlineCours.Models
         public string ApplicationUserID { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
 
-        
+        public List<UniveristyRequest> univeristyRequests { get; set; } 
     }
 }
