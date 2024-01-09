@@ -22,6 +22,8 @@ namespace OnlineCours.Models
         public DbSet<CustomAppointment> CustomAppointments { get; set; }
         public DbSet<RequestAppointment> RequestAppointments { get; set; }
         public DbSet<InstructorSubjectBridge> InstructorSubjects { get; set; }
+        public DbSet<Tutorial> Tutorials { get; set; }
+        public DbSet<SubjectTutorial> SubjectTutorial { get; set; }
 
 
     }

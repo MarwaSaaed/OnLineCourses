@@ -61,6 +61,8 @@ namespace OnlineCours
             builder.Services.AddScoped<IPersonRepository<Instructor>, PersonRepository<Instructor>>();
             builder.Services.AddScoped<IPersonRepository<Student>, PersonRepository<Student>>();
             builder.Services.AddScoped<IRepository<CustomAppointment>, Repository<CustomAppointment>>();
+            builder.Services.AddScoped<IRepository<SubjectTutorial>, Repository<SubjectTutorial>>();
+            builder.Services.AddScoped<IRepository<Tutorial>, Repository<Tutorial>>();
             builder.Services.AddScoped<IOtherRequestRepositry, OtherRequestRepositry>();
             builder.Services.AddScoped<ICourseRequesRepositry, CourseRequesRepositry>();
 
