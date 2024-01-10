@@ -4125,11 +4125,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ITI_9\\Work\\OnlineCours\\BackendCourse\\Back\\OnlineCours\\OnlineCours.csproj",
+      "projectUniqueName": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\OnlineCours.csproj",
       "projectName": "OnlineCours",
-      "projectPath": "D:\\ITI_9\\Work\\OnlineCours\\BackendCourse\\Back\\OnlineCours\\OnlineCours.csproj",
+      "projectPath": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\OnlineCours.csproj",
       "packagesPath": "C:\\Users\\win 10\\.nuget\\packages\\",
-      "outputPath": "D:\\ITI_9\\Work\\OnlineCours\\BackendCourse\\Back\\OnlineCours\\obj\\",
+      "outputPath": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\win 10\\AppData\\Roaming\\NuGet\\NuGet.Config",

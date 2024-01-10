@@ -1,16 +1,104 @@
 {
   "Files": [
     {
-      "Id": "D:\\ITI_9\\Work\\OnlineCours\\BackendCourse\\Back\\OnlineCours\\wwwroot\\uploads\\4c22851f-5405-41eb-9224-595abf163ab7.jpeg",
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\032f53f4-b6e1-4dbb-8b93-8ef7f5fb7b70.docx",
+      "PackagePath": "staticwebassets\\uploads\\032f53f4-b6e1-4dbb-8b93-8ef7f5fb7b70.docx"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\05fe6462-7a32-4ec9-925a-76437c0ab5b1.docx",
+      "PackagePath": "staticwebassets\\uploads\\05fe6462-7a32-4ec9-925a-76437c0ab5b1.docx"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\1ba65b5b-1ac7-4518-94c2-4cf013885fb6.png",
+      "PackagePath": "staticwebassets\\uploads\\1ba65b5b-1ac7-4518-94c2-4cf013885fb6.png"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\1e986f6f-ceab-45ad-a24c-5b73fe089e57.sql",
+      "PackagePath": "staticwebassets\\uploads\\1e986f6f-ceab-45ad-a24c-5b73fe089e57.sql"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\4c22851f-5405-41eb-9224-595abf163ab7.jpeg",
       "PackagePath": "staticwebassets\\uploads\\4c22851f-5405-41eb-9224-595abf163ab7.jpeg"
     },
     {
-      "Id": "D:\\ITI_9\\Work\\OnlineCours\\BackendCourse\\Back\\OnlineCours\\wwwroot\\uploads\\7459e362-eec8-43cf-96f7-744f159563f4.jpg",
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\5116a5f4-badb-4c6c-a033-41de346736ac.docx",
+      "PackagePath": "staticwebassets\\uploads\\5116a5f4-badb-4c6c-a033-41de346736ac.docx"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\660769d0-3fdf-4379-9cfe-a8cc5e6f2c07.docx",
+      "PackagePath": "staticwebassets\\uploads\\660769d0-3fdf-4379-9cfe-a8cc5e6f2c07.docx"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\7423a7ff-ebc7-4321-9bb6-c7ed636f30f9.docx",
+      "PackagePath": "staticwebassets\\uploads\\7423a7ff-ebc7-4321-9bb6-c7ed636f30f9.docx"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\7459e362-eec8-43cf-96f7-744f159563f4.jpg",
       "PackagePath": "staticwebassets\\uploads\\7459e362-eec8-43cf-96f7-744f159563f4.jpg"
     },
     {
-      "Id": "D:\\ITI_9\\Work\\OnlineCours\\BackendCourse\\Back\\OnlineCours\\wwwroot\\uploads\\df6e0135-9b89-464e-93c9-21a2892d51b1.pdf",
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\76077a1a-7b48-432d-aea0-81666893d2b9.docx",
+      "PackagePath": "staticwebassets\\uploads\\76077a1a-7b48-432d-aea0-81666893d2b9.docx"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\819ab071-c33d-4102-96cb-6758c4ed9442.docx",
+      "PackagePath": "staticwebassets\\uploads\\819ab071-c33d-4102-96cb-6758c4ed9442.docx"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\8d2ba39d-977b-467d-9c15-217054fafe89.sql",
+      "PackagePath": "staticwebassets\\uploads\\8d2ba39d-977b-467d-9c15-217054fafe89.sql"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\90b79923-abc5-46c8-8ec3-17f6b7acee28.png",
+      "PackagePath": "staticwebassets\\uploads\\90b79923-abc5-46c8-8ec3-17f6b7acee28.png"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\a565a731-2cf6-4bef-90f4-5eb32702e486.pdf",
+      "PackagePath": "staticwebassets\\uploads\\a565a731-2cf6-4bef-90f4-5eb32702e486.pdf"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\b7b0018f-c4f7-4c83-b979-7fa31eee3ae8.docx",
+      "PackagePath": "staticwebassets\\uploads\\b7b0018f-c4f7-4c83-b979-7fa31eee3ae8.docx"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\c3d895e9-0afe-4ce7-8fd0-fe3de2f25912.png",
+      "PackagePath": "staticwebassets\\uploads\\c3d895e9-0afe-4ce7-8fd0-fe3de2f25912.png"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\c7dd9727-67bc-4f1d-be83-f68d271e04e5.docx",
+      "PackagePath": "staticwebassets\\uploads\\c7dd9727-67bc-4f1d-be83-f68d271e04e5.docx"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\d2357d7a-0cd2-4d0b-9ec8-cc36ba9901cb.docx",
+      "PackagePath": "staticwebassets\\uploads\\d2357d7a-0cd2-4d0b-9ec8-cc36ba9901cb.docx"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\dc513637-da49-4fa3-bbf6-6e5cf0281df8.docx",
+      "PackagePath": "staticwebassets\\uploads\\dc513637-da49-4fa3-bbf6-6e5cf0281df8.docx"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\dcee5298-a755-464f-8df8-aa00881505f9.docx",
+      "PackagePath": "staticwebassets\\uploads\\dcee5298-a755-464f-8df8-aa00881505f9.docx"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\df6e0135-9b89-464e-93c9-21a2892d51b1.pdf",
       "PackagePath": "staticwebassets\\uploads\\df6e0135-9b89-464e-93c9-21a2892d51b1.pdf"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\e771e0fa-e875-4745-8dfe-b878926d4ced.sql",
+      "PackagePath": "staticwebassets\\uploads\\e771e0fa-e875-4745-8dfe-b878926d4ced.sql"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\ecc1fcc3-9312-44d7-aed1-f363a16be3ef.docx",
+      "PackagePath": "staticwebassets\\uploads\\ecc1fcc3-9312-44d7-aed1-f363a16be3ef.docx"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\ef27f184-218b-467a-8b0e-a41c4c521dba.pdf",
+      "PackagePath": "staticwebassets\\uploads\\ef27f184-218b-467a-8b0e-a41c4c521dba.pdf"
+    },
+    {
+      "Id": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\wwwroot\\uploads\\f1e163a7-7311-4955-83b6-3131c8f6449c.docx",
+      "PackagePath": "staticwebassets\\uploads\\f1e163a7-7311-4955-83b6-3131c8f6449c.docx"
     },
     {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.OnlineCours.Microsoft.AspNetCore.StaticWebAssets.props",
