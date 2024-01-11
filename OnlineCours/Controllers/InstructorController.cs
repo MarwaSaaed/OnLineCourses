@@ -183,5 +183,33 @@ namespace OnlineCours.Controllers
             }
 
         }
+        [HttpPut("UpdateInstructorProfile/{id}")]
+        public async Task<IActionResult> UpdateInstructor(string id, UpdateInstructorDTO instructor)
+        {
+            var oldInstructor = await _instructorRepository.GetByFilterAsync(s => s.applicationUserID == id, "applicationUser");
+
+            if (oldInstructor == null)
+            {
+                return NotFound();
+            }
+            oldInstructor.applicationUser.Name = instructor.Name;
+            oldInstructor.applicationUser.PhoneNumber = instructor.phone;
+            oldInstructor.applicationUser.Email = instructor.Email;
+            await _instructorRepository.UpdateAsync(oldInstructor);
+            return Ok("updated");
+        }
+
+        [HttpGet("GetInstructorWithSubject/{id}")]
+        public async Task<ActionResult<InstructorDTO>> GetInstructorWithsubject(string id)
+        {
+
+            var instructorwithsubject = await _instructorRepository.GetInstructorWithSubject(id);
+            if (instructorwithsubject == null)
+            {
+                return NotFound();
+            }
+            return instructorwithsubject;
+
+        }
     }
 }
