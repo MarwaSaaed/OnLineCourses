@@ -5,5 +5,7 @@ namespace OnlineCours.Repository
 {
     public interface IUniveristyRequestRepositry:IRepository<UniveristyRequest>
     {
+
+
     }
 }
