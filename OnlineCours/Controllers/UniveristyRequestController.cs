@@ -16,23 +16,6 @@ namespace OnlineCours.Controllers
         {
             this.univeristyRequestRepositry = univeristyRequestRepositry;
         }
-        [HttpGet("GetUniveristyStudentRequest")]
-
-        public async Task<ActionResult<List<UniveristyStudentRequestDTO>>> GetUniveristyRequest()
-        {
-            try
-            {
-                var request=await univeristyRequestRepositry.GetUniveristyRequest();
-                
-                return request;
-            }
-            catch(Exception ex)
-            {
-                return StatusCode(500, "Internal Server Error");
-
-            }
-        }
-
 
         [HttpGet("GetAllUniveristyRequest")]
             public ActionResult<List<UniveristyRequestDTO>> GetAllCoursesRequest()
