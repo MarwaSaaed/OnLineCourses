@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineCours.Models;
 
@@ -11,9 +12,11 @@ using OnlineCours.Models;
 namespace OnlineCours.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240104225731_io9")]
+    partial class io9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -502,65 +505,6 @@ namespace OnlineCours.Migrations
                     b.ToTable("Subjects");
                 });
 
-            modelBuilder.Entity("OnlineCours.Models.SubjectTutorial", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("TutorialId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TutorialType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("subjectTutorial")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TutorialId");
-
-                    b.ToTable("SubjectTutorial");
-                });
-
-            modelBuilder.Entity("OnlineCours.Models.Tutorial", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("InstructorSubjectId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StudentId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("InstructorSubjectId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("Tutorials");
-                });
-
             modelBuilder.Entity("OnlineCours.Models.UniveristyRequest", b =>
                 {
                     b.Property<int>("Id")
@@ -594,7 +538,7 @@ namespace OnlineCours.Migrations
 
                     b.HasIndex("StudentID");
 
-                    b.ToTable("univeristyRequests");
+                    b.ToTable("UniveristyRequest");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -739,36 +683,6 @@ namespace OnlineCours.Migrations
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
-                });
-
-            modelBuilder.Entity("OnlineCours.Models.SubjectTutorial", b =>
-                {
-                    b.HasOne("OnlineCours.Models.Tutorial", "Tutorial")
-                        .WithMany()
-                        .HasForeignKey("TutorialId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Tutorial");
-                });
-
-            modelBuilder.Entity("OnlineCours.Models.Tutorial", b =>
-                {
-                    b.HasOne("OnlineCours.Models.InstructorSubjectBridge", "InstructorSubject")
-                        .WithMany()
-                        .HasForeignKey("InstructorSubjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OnlineCours.Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("InstructorSubject");
-
-                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("OnlineCours.Models.UniveristyRequest", b =>

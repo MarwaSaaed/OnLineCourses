@@ -122,5 +122,9 @@ namespace OnlineCours.Controllers
             var instructors = await _requestReopsitory.GetAllPenddingRequest();
             return Ok(instructors);
         }
+
+      
+
+
     }
 }
