@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mCLSxgYjRRf8FTYPZ2xJuAejSpjFIClwY996sH5nrvKUoXvYDRHMHauif261iL5zVH+6tgF7FG1uLaJof8vasQ==",
+  "dgSpecHash": "Y6XNxmU307bmgkV9FLwpQKyPEl4phE7hugoE+euAmI33GLUGqBNc5wGgOxNQxdEpRkhkCjHFCLoAYzY9LsLWTw==",
   "success": true,
-  "projectFilePath": "D:\\ITI_9\\Work\\OnlineCours\\Backoo\\OnlineCours\\OnlineCours.csproj",
+  "projectFilePath": "D:\\ITI_9\\Work\\OnlineCours\\BackendCourse\\Back\\OnlineCours\\OnlineCours.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\win 10\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\win 10\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
