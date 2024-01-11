@@ -89,8 +89,28 @@ namespace OnlineCours.Controllers
                 }
                 return BadRequest("Not Found");
             }
+        [HttpGet("GetUniveristyStudentRequest")]
 
+        public async Task<ActionResult<List<UniveristyStudentRequestDTO>>> GetUniveristyRequest()
+        {
+            try
+            {
+                var request = await univeristyRequestRepositry.GetUniveristyRequest();
+
+                return request;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+
+            }
+            /// <summary>
+            /// ////////
+            /// </summary>
         }
 
-    
+
+    }
+
+
 }
