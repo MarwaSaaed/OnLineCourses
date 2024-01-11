@@ -24,6 +24,9 @@ namespace OnlineCours.Models
         public DbSet<InstructorSubjectBridge> InstructorSubjects { get; set; }
         public DbSet<Tutorial> Tutorials { get; set; }
         public DbSet<SubjectTutorial> SubjectTutorial { get; set; }
+        /// <summary>
+        /// ////////
+        /// </summary>
         public DbSet<UniveristyRequest> univeristyRequests { get; set; }
 
 
