@@ -66,6 +66,7 @@ namespace OnlineCours
             builder.Services.AddScoped<IOtherRequestRepositry, OtherRequestRepositry>();
             builder.Services.AddScoped<ICourseRequesRepositry, CourseRequesRepositry>();
             builder.Services.AddScoped<IUniveristyRequestRepositry, UniveristyRequestRepositry>();
+            builder.Services.AddScoped<IstudentRepository, studentRepository>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

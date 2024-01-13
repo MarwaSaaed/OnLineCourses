@@ -32,7 +32,7 @@ namespace OnlineCours.Controllers
                 IRepository<CustomAppointment> CustomAppointment,
                 IRequestRepository requestReopsitory,
                  IstudentRepository studentrepository
-            ) 
+            )
         {
             _RequestRepository = RequestRepository;
             _AppointmentRepository = AppointmentRepository;
@@ -105,7 +105,7 @@ namespace OnlineCours.Controllers
 
 
         [HttpGet("GetStudentSubject")]
-        public  async Task <IActionResult> GetStudentSubject(string StudentId)
+        public async Task<IActionResult> GetStudentSubject(string StudentId)
         {
             List<Subject> Subjects = await _SubjectRepository.GetSubjectsByStudent(StudentId);
             return Ok(Subjects);
@@ -152,6 +152,19 @@ namespace OnlineCours.Controllers
             OldStudent.ApplicationUser.Email = student.Email;
             await _studentrepository.UpdateAsync(OldStudent);
             return Ok("updated");
+        }
+
+        [HttpGet("GetStudentTutrorail")]
+        public async Task<IActionResult> GetTutorial(string StudentId) 
+        {
+            var res = await _studentrepository.GetTutorial(StudentId);
+            return Ok(res);
+        } 
+        [HttpGet("GetStudentTutrorail2")]
+        public async Task<IActionResult> GetTutorial2(string StudentId) 
+        {
+            var res = await _studentrepository.GetTutorial2(StudentId);
+            return Ok(res);
         }
     }
 }
