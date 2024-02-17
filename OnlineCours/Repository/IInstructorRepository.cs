@@ -23,6 +23,7 @@ namespace OnlineCours.Repository
         bool Exists(string id);
        Task<List<InstructorDTO>> GetAllPendingInstructoresAsync();
         Task<InstructorDTO> GetInstructorWithSubject(string id);
+        Task<InstructorSubjectsAndAppointmentDTO> GetInstructorSubjectandAppointment(string id);
 
     }
 }

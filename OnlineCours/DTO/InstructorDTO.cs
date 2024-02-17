@@ -4,7 +4,6 @@ namespace OnlineCours.DTO
 {
     public class InstructorDTO
     {
-        
         public string? Id { get; set; }
         public string Name { get; set; }
         public string? Email { get; set; }
@@ -16,4 +15,15 @@ namespace OnlineCours.DTO
         public List<string>? Subjects { get; set; }
 
     }
+
+    public class InstructorSubjectsAndAppointmentDTO
+    {
+        public string? Id { get; set; }
+        public string Name { get; set; }
+        public string? InstructorID { get; set; }
+        public int? InstructorSubjectBridgeID { get; set; }
+        public List<SubjectAppoinstmentDTO>? SubjectsAppointments { get; set; }
+    }
+
+
 }

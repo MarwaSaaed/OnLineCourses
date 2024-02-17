@@ -449,6 +449,41 @@ namespace OnlineCours.Repository
         }
 
 
+        public async Task<InstructorSubjectsAndAppointmentDTO> GetInstructorSubjectandAppointment(string id)
+        {
+            var instructorWithSubjectsAndAppointments = await _context.InstructorSubjects
+                .Include(i => i.Instructor)
+                    .ThenInclude(s => s.applicationUser)
+                .Include(s => s.Subject)
+                .Include(s => s.Appointments)
+                .Where(s => s.InstructorID == id)
+                .ToListAsync();
+
+            if (instructorWithSubjectsAndAppointments == null || instructorWithSubjectsAndAppointments.Count == 0)
+            {
+                return null;
+            }
+
+            var instructorDTO = new InstructorSubjectsAndAppointmentDTO
+            {
+                Id = instructorWithSubjectsAndAppointments.FirstOrDefault().InstructorID,
+                Name = instructorWithSubjectsAndAppointments.FirstOrDefault().Instructor.applicationUser.Name,
+                SubjectsAppointments = instructorWithSubjectsAndAppointments.SelectMany(s => s.Appointments)
+                    .GroupBy(a => a.InstructorSubjectBridge.Subject.Name)
+                    .Select(g => new SubjectAppoinstmentDTO
+                    {
+                        SubjectsName = g.First().InstructorSubjectBridge.Subject.Name,
+                        Appointments = g.Select(a => new AppoinstmentDTO
+                        {
+                            Id = a.Id,
+                            LectureDate = a.LectureDate.ToString(),
+                            DayOfWeek = a.DayOfWeek.ToString(),
+                        }).ToList()
+                    }).ToList()
+            };
+
+            return instructorDTO;
+        }
 
     }
 }

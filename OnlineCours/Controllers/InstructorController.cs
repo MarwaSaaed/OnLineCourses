@@ -15,20 +15,24 @@ namespace OnlineCours.Controllers
     {
         private readonly IInstructorRepository _instructorRepository;
         private readonly IRepository<CustomAppointment> _CustomAppointmentRepository;
+        private readonly IRepository<Appointment> _AppointmentRepository;
         private readonly IRepository<Tutorial> _TutorialRepository;
         private readonly IRepository<SubjectTutorial> _SubjectTutorialRepository;
         private readonly IInstructorSubjectBridgeRepository _InstructorSubjectBridgeRepository;
 
 
-        public InstructorController(IRepository<SubjectTutorial> SubjectTutorialRepository,IInstructorSubjectBridgeRepository InstructorSubjectBridgeRepository, IRepository<Tutorial> tutorialRepository, IInstructorRepository instructorRepository, IRepository<CustomAppointment> CustomAppointmentRepository)
+        public InstructorController(IRepository<SubjectTutorial> SubjectTutorialRepository,
+            IInstructorSubjectBridgeRepository InstructorSubjectBridgeRepository, 
+            IRepository<Tutorial> tutorialRepository, IInstructorRepository instructorRepository, 
+            IRepository<CustomAppointment> CustomAppointmentRepository,
+            IRepository<Appointment> AppointmentRepository)
         {
             _instructorRepository = instructorRepository;
             _CustomAppointmentRepository = CustomAppointmentRepository;
             _TutorialRepository = tutorialRepository;
             _InstructorSubjectBridgeRepository = InstructorSubjectBridgeRepository;
             _SubjectTutorialRepository = SubjectTutorialRepository;
-
-
+            _AppointmentRepository = AppointmentRepository;
         }
 
         [HttpGet("GetAllInstructors")]
@@ -120,7 +124,7 @@ namespace OnlineCours.Controllers
         public async Task<ActionResult> AddInstructorSubject(InstructorSubjectDTO instructorSubjectDTO)
         {
             var instructors = await _instructorRepository.AddInstructorSubject(instructorSubjectDTO);
-            return Ok(instructors);
+            return Ok();
         }
 
 
@@ -148,6 +152,24 @@ namespace OnlineCours.Controllers
             }
             return Conflict("The appointment not found");
         }
+
+        [HttpPut("EditInstructorAppointment/{id}")]
+        public async Task<IActionResult> EditInstructorAppointment(int id, EditAppointmentModel EditAppointmentModel)
+        {
+            var appointmetn = await _AppointmentRepository.GetById(id);
+            if (appointmetn != null)
+            {
+                appointmetn.LectureDate = EditAppointmentModel.LectureDate;
+                Enum.TryParse(typeof(Day), EditAppointmentModel.DayOfWeek, out object dayEnumValue);
+                Day day = (Day)dayEnumValue;
+                appointmetn.DayOfWeek = day;
+                await _AppointmentRepository.UpdateAsync(appointmetn);
+                return Ok(appointmetn);
+
+            }
+            return Conflict("The appointment not found");
+        }
+
 
         [HttpPost("UploadTutorial")]
         public async Task<IActionResult> UploadTutorialOfSubjcet(UploadTutorialModel uploadTutorialModel)
@@ -204,6 +226,20 @@ namespace OnlineCours.Controllers
         {
 
             var instructorwithsubject = await _instructorRepository.GetInstructorWithSubject(id);
+            if (instructorwithsubject == null)
+            {
+                return NotFound();
+            }
+            return instructorwithsubject;
+
+        }
+
+
+        [HttpGet("GetInstructorSubjectandAppointment/{id}")]
+        public async Task<ActionResult<InstructorSubjectsAndAppointmentDTO>> GetInstructorSubjectandAppointment(string id)
+        {
+
+            var instructorwithsubject = await _instructorRepository.GetInstructorSubjectandAppointment(id);
             if (instructorwithsubject == null)
             {
                 return NotFound();
