@@ -12,7 +12,7 @@ using System.Numerics;
 
 namespace OnlineCours.Repository
 {
-    public class InstructorRepository :PersonRepository<Instructor> , IInstructorRepository
+    public class InstructorRepository : PersonRepository<Instructor>, IInstructorRepository
     {
         private readonly IRequestAppointmentRepository _RequestAppointmentRepository;
 
@@ -117,7 +117,7 @@ namespace OnlineCours.Repository
             insDTO.status = Instructor.status;
             insDTO.Appointments = Appointment;
             insDTO.Subjects = subjects;
-            
+
             return insDTO;
         }
 
@@ -229,7 +229,7 @@ namespace OnlineCours.Repository
 
             List<InstructorDTO> insDTO = instructors.Select(instructor => new InstructorDTO
             {
-                Name = instructor.applicationUser.UserName, 
+                Name = instructor.applicationUser.UserName,
                 status = instructor.status,
                 Appointments = instructor.InstructorSubjectBridge
                 .SelectMany(bridge => bridge.Appointments
@@ -322,31 +322,42 @@ namespace OnlineCours.Repository
         public async Task<List<InstructorDTO>> GetBySubject(int SubjectId)
         {
             var instructors = _context.InstructorSubjects
-                .Where(bridge => bridge.SubjectID == SubjectId)
-                .Include(x => x.Instructor)
-                .ThenInclude(x => x.InstructorSubjectBridge)
-                .ThenInclude(x => x.Subject)
-                .Include(x => x.Instructor)
-                .ThenInclude(x => x.applicationUser)
-                .Include(x => x.Instructor)
-                .ThenInclude(x => x.InstructorSubjectBridge)
-                .ThenInclude(x => x.Appointments)
-                .ToList();
+    .Where(bridge => bridge.SubjectID == SubjectId)
+    .Include(x => x.Instructor)
+        .ThenInclude(x => x.InstructorSubjectBridge)
+            .ThenInclude(x => x.Subject)
+    .Include(x => x.Instructor)
+        .ThenInclude(x => x.applicationUser)
+    .Include(x => x.Instructor)
+        .ThenInclude(x => x.InstructorSubjectBridge)
+            .ThenInclude(x => x.Appointments)
+    .AsEnumerable() // To prevent EF Core query translation issues with complex operations
+    .GroupBy(r => r.InstructorID)
+    .ToList();
 
-            List<InstructorDTO> insDTO = instructors.Select(instructor => new InstructorDTO
-            {
-                Name = instructor.Instructor.applicationUser.UserName,
-                InstructorID = instructor.Instructor.applicationUserID,
-                status = instructor.Instructor.status,
-                Appointments = instructor.Instructor.InstructorSubjectBridge
-                    .SelectMany(bridge => bridge.Appointments
+            List<InstructorDTO> insDTO = instructors.Select(group => {
+                var firstInstructor = group.First().Instructor;
+                return new InstructorDTO
+                {
+                    Name = firstInstructor.applicationUser.UserName,
+                    InstructorID = firstInstructor.applicationUser.Id,
+                    status = firstInstructor.status,
+                    Appointments = group
+                        .SelectMany(g => g.Instructor.InstructorSubjectBridge)
+                        .SelectMany(bridge => bridge.Appointments)
                         .Where(appointment => !IsInstructorAppointmentRequestedByStudent(appointment, appointment.InstructorSubjectBridgeID))
+                        .Select(appointment => new {
+                            appointment.LectureDate,
+                            DayOfWeek = appointment.DayOfWeek.ToString()
+                        })
+                        .Distinct() 
                         .Select(appointment => new AppoinstmentDTO
                         {
                             LectureDate = appointment.LectureDate,
-                            DayOfWeek = appointment.DayOfWeek.ToString()
-                        }))
-                    .ToList(),
+                            DayOfWeek = appointment.DayOfWeek
+                        })
+                        .ToList()
+                };
             }).ToList();
 
             return insDTO;
@@ -364,18 +375,18 @@ namespace OnlineCours.Repository
 
         public async Task<List<InstructorDTO>> GetAllPendingInstructoresAsync()
         {
-            List<Instructor> instructors =await _context.Instructors
+            List<Instructor> instructors = await _context.Instructors
             .Include(x => x.applicationUser)
-             .Where(x=>x.status==StatusOfInstructor.Pendding).ToListAsync();
+             .Where(x => x.status == StatusOfInstructor.Pendding).ToListAsync();
 
 
             List<InstructorDTO> insDTO = new List<InstructorDTO>();
 
             foreach (var instructor in instructors)
             {
-                
-            
-       
+
+
+
                 insDTO.Add(new InstructorDTO
                 {
                     Id = instructor.applicationUserID,
@@ -383,7 +394,7 @@ namespace OnlineCours.Repository
                     Email = instructor.applicationUser.Email,
                     Phone = instructor.applicationUser.PhoneNumber,
                     status = instructor.status,
-                   
+
                 });
             }
 
